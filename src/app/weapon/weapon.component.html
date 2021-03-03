@@ -1,0 +1,8 @@
+<h2>L'ensemble des ARMES disponibles</h2>
+<ul class="heroes">
+  <li *ngFor="let weapon of weapons">
+    <a routerLink="/detailsWeapon/{{weapon.id}}">
+      <span  class="badge">{{weapon.id}}</span>  {{weapon.name}}
+    </a>
+  </li>
+</ul>

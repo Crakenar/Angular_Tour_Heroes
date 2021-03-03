@@ -1,5 +1,7 @@
-export interface Hero
+import {Serializable} from './serializable';
+
+export class  Hero extends Serializable
 {
-  id: number;
-  name: string;
+  id?: string;
+  name?: string;
 }

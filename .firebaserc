@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tourofheroes-80520": {
+      "hosting": {
+        "angular-tour-of-heroesV2-berguert": [
+          "tourofheroes-80520"
+        ]
+      }
+    }
+  }
+}

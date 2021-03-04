@@ -27,26 +27,23 @@ export class HeroService {
       .snapshotChanges()
       .pipe(
         map(liste => {
-
           // log
           console.log('getHeroes()');
-
           // Traitement de la liste
           return liste.map(item => {
-
             // Get document data
             const data = item.payload.doc.data();
-
             // New Hero
+            console.log(data);
             const hero = new Hero().fromJSON(data);
-
             // Get document id
             const id = item.payload.doc.id;
+            // Hero. id = number or Firebase id = string
+            // hero.id = +id;
             hero.id = id;
-
             // log
             console.log('   hero ' + id);
-
+            console.log(hero);
             // Use spread operator to add the id to the document data
             return hero;
 
@@ -56,7 +53,6 @@ export class HeroService {
   }
   // Récupération d'un héro en fonction de son id
   getHero(id: string): Observable<Hero> {
-
     // Return hero observable
     return this.getHeroDocument(id).snapshotChanges()
       .pipe(

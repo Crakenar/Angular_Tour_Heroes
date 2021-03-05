@@ -72,12 +72,12 @@ export class HeroService {
   }
 
   // Ajout d'un héro
-  addHero(hero: Hero): void {
+  addHero(hero?: Hero): void {
     this.db.collection<Hero>(HeroService.url).add(Object.assign({}, hero));
   }
 
   // Modification d'un héro
-  updateHero(hero: Hero | undefined): void {
+  updateHero(hero?: Hero | undefined): void {
 
     // Update document
     // @ts-ignore
@@ -85,15 +85,14 @@ export class HeroService {
   }
 
   // Suppression d'un héro
-  deleteHero(id: string): void {
-
+  deleteHero(id?: string): void {
     // Delete the document
     this.getHeroDocument(id).delete();
   }
 
 
   // Création du service Firebase en fonction de l'id du héro
-  private getHeroDocument(id: string): AngularFirestoreDocument<Hero> {
+  private getHeroDocument(id?: string): AngularFirestoreDocument<Hero> {
 
     // return document
     return this.db.doc<Hero>(HeroService.url + `/` + id);

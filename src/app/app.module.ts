@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +12,8 @@ import { WeaponComponent } from './weapon/weapon.component';
 import { DetailWeaponComponent } from './detail-weapon/detail-weapon.component';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
+import { AddHeroComponent } from './add-hero/add-hero.component';
+
 
 @NgModule({
   declarations: [
@@ -21,15 +23,17 @@ import {environment} from '../environments/environment';
     MessagesComponent,
     DashboardComponent,
     WeaponComponent,
-    DetailWeaponComponent
+    DetailWeaponComponent,
+    AddHeroComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        AngularFireModule,
-        AngularFireModule.initializeApp(environment.firebase)
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

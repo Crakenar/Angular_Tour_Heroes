@@ -1,0 +1,8 @@
+<form #formHero="ngForm" (ngSubmit)="onSubmit(formHero.value)">
+  <div>
+    <label for="hero-name">Ajouter un Hero: </label>
+    <input type="text" id="hero-name" [(ngModel)]="name" name="name" placeholder="Nom du hero">
+  </div>
+  <button>Valider</button>
+  <!--[disabled]="!form.valid"-->
+</form>

@@ -12,6 +12,7 @@ import {AngularFirestore} from '@angular/fire/firestore';
 })
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero | undefined;
+  public update?: string;
   constructor(
     private firestore: AngularFirestore,
     private route: ActivatedRoute,
@@ -20,6 +21,7 @@ export class HeroDetailComponent implements OnInit {
 
   ngOnInit(): void {
       this.getHero();
+      this.getIfUpdate();
   }
 
   getHero(): void{
@@ -28,15 +30,24 @@ export class HeroDetailComponent implements OnInit {
       const idInt = +idString;
       this.heroService.getHero(idString)
         .subscribe(hero => this.hero = hero);
-      /*this.heroService.getHero(idInt)
-        .subscribe(hero => this.hero = hero);*/
     }
-    /*const idString = this.route.snapshot.paramMap.get('id');
-    if (idString){
-     const idInt = +idString;*/
-     // this.firestore.collection('heroes').doc(idInt) this.firestore.collection('heroes').
-     // this.heroService.getHero(idInt).subscribe(hero => this.hero = hero);
+
     }
+    getIfUpdate(): void {
+      const path = this.route.snapshot.url;
+      console.log(path);
+      if (path.length === 3){
+        this.update = path[2].path;
+      }else{
+        this.update = '';
+      }
+    }
+
+  onSubmit(val: any): void {
+    console.log(this.hero);
+    this.heroService.updateHero(this.hero);
+  }
+
   goBack(): void {
     this.location.back();
   }

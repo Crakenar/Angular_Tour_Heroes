@@ -18,6 +18,7 @@
       <span  class="badge">{{hero.id}}</span>  {{hero.name}}
     </a>
     <button (click)="delete(hero.id)">Delete</button>
+    <button routerLink="/details/{{hero.id}}/update">Update</button>
   </div>
 </div>
 <a href="/addHero">Ajouter un Hero</a>

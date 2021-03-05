@@ -1,10 +1,23 @@
 Hero Detail Component
 <div *ngIf="hero">
-  <h2>{{hero.name | uppercase}} Details</h2>
-  <div><span>id: </span>{{hero.id}}</div>
-  <div>
-    <label for="hero-name">Hero name: </label>
-    <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
+  <div *ngIf="!update">
+    <h2>{{hero.name | uppercase}} Details</h2>
+    <div><span>id: </span>{{hero.id}}</div>
+    <div>
+      <label for="hero-name">Hero name: </label>
+      <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
+    </div>
+  </div>
+  <div *ngIf="update">
+    <h2>{{hero.name | uppercase}} Details</h2>
+    <form #formHero="ngForm" (ngSubmit)="onSubmit(formHero.value)">
+      <div>
+        <label for="hero-name-update">Mettre a jour votre hero: </label>
+        <input type="text" id="hero-name-update" [(ngModel)]="hero.name" name="name" placeholder="Nom du hero">
+      </div>
+      <button>Valider</button>
+      <!--[disabled]="!form.valid"-->
+    </form>
   </div>
 </div>
 <button (click)="goBack()">go back</button>

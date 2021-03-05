@@ -78,7 +78,6 @@ export class HeroService {
 
   // Modification d'un héro
   updateHero(hero?: Hero | undefined): void {
-
     // Update document
     // @ts-ignore
     this.getHeroDocument(hero.id).update(Object.assign({}, hero));

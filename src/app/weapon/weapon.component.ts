@@ -11,13 +11,21 @@ import {MessageService} from '../Services/messages.service';
 export class WeaponComponent implements OnInit {
 
   weapons: Weapon[] = [];
-  getWeapons(): void{
-    this.weaponService.getWeapons().subscribe(weapons => this.weapons = weapons);
-}
+
+
   constructor(private messageService: MessageService, private weaponService: WeaponsService) { }
 
   ngOnInit(): void {
     this.getWeapons();
   }
+
+  getWeapons(): void{
+    this.weaponService.getWeapons().subscribe(weapons => this.weapons = weapons);
+  }
+
+  delete(id?: string): void {
+    this.weaponService.deleteWeapon(id);
+  }
+
 
 }

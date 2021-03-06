@@ -14,6 +14,12 @@ export class HeroesComponent implements OnInit {
 
   heroes: Hero[] = [];
   itemFireBase?: Observable<any[]>;
+
+  constructor(private messageService: MessageService, private heroService: HeroService, private firestore: AngularFirestore) { }
+
+  ngOnInit(): void {
+    this.getHeroes();
+  }
   getHeroes(): void {
      this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
     // this.itemFireBase = this.firestore.collection('heroes').valueChanges();
@@ -23,10 +29,6 @@ export class HeroesComponent implements OnInit {
   delete(id?: string): void {
     this.heroService.deleteHero(id);
   }
-  constructor(private messageService: MessageService, private heroService: HeroService, private firestore: AngularFirestore) { }
 
-  ngOnInit(): void {
-    this.getHeroes();
-  }
 
 }

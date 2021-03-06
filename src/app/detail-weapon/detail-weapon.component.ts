@@ -25,7 +25,8 @@ export class DetailWeaponComponent implements OnInit {
     const idString = this.route.snapshot.paramMap.get('id');
     if (idString){
       const idInt = +idString;
-      this.weaponService.getWeapon(idInt).subscribe(weapon => this.weapon = weapon);
+      this.weaponService.getWeapon(idString)
+        .subscribe(weapon => this.weapon = weapon);
     }
   }
 

@@ -1,7 +1,8 @@
-export interface Weapon
+import {Serializable} from './serializable';
+export class Weapon extends Serializable
 {
-  id: number;
-  name: string;
-  damage: number;
-  weight: number;
+  id?: string;
+  name?: string;
+  damage?: number;
+  weight?: number;
 }

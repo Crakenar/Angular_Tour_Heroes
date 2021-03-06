@@ -2,9 +2,13 @@ Weapon Detail Component
 <div *ngIf="weapon">
   <h2>{{weapon.name | uppercase}} Details</h2>
   <div><span>id: </span>{{weapon.id}}</div>
+  <br>
   <div>
     <label for="hero-name">Weapon name: </label>
     <input id="hero-name" [(ngModel)]="weapon.name" placeholder="name">
+    <br>
+    <p>Degats de l'arme : {{weapon.damage}}</p>
+    <p>Poids de l'arme : {{weapon.weight}}</p>
   </div>
 </div>
 <button (click)="goBack()">go back</button>

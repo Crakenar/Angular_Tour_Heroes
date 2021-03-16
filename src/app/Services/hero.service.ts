@@ -21,8 +21,6 @@ export class HeroService {
 
   // Récupération des héros
   getHeroes(): Observable<Hero[]> {
-
-    //
     return this.db.collection<Hero>(HeroService.url)
       .snapshotChanges()
       .pipe(
@@ -46,7 +44,6 @@ export class HeroService {
             console.log(hero);
             // Use spread operator to add the id to the document data
             return hero;
-
           });
         })
       );
@@ -92,7 +89,6 @@ export class HeroService {
 
   // Création du service Firebase en fonction de l'id du héro
   private getHeroDocument(id?: string): AngularFirestoreDocument<Hero> {
-
     // return document
     return this.db.doc<Hero>(HeroService.url + `/` + id);
   }

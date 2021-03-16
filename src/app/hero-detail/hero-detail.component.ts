@@ -43,8 +43,7 @@ export class HeroDetailComponent implements OnInit {
       }
     }
 
-  onSubmit(val: any): void {
-    console.log(this.hero);
+  onSubmit(): void {
     this.heroService.updateHero(this.hero);
   }
 

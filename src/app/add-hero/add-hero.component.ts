@@ -16,10 +16,9 @@ export class AddHeroComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSubmit(val: any): void {
-    console.log(val);
+  onSubmit(): void {
     const hero = new Hero();
-    hero.name = val.name;
+    hero.points = 40;
     this.heroService.addHero(hero);
   }
 }

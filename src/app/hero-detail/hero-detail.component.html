@@ -5,19 +5,47 @@ Hero Detail Component
     <div><span>id: </span>{{hero.id}}</div>
     <div>
       <label for="hero-name">Hero name: </label>
-      <input id="hero-name" [(ngModel)]="hero.name" placeholder="name">
+      <span id="hero-name" placeholder="name">{{hero.name}}</span>
+      <br>
+      <label>Point de vie : </label>
+      <span>{{hero.pv}}</span>
+      <br>
+      <label>Attaque : </label>
+      <span>{{hero.attaque}}</span>
+      <br>
+      <label>Esquive : </label>
+      <span>{{hero.esquive}}</span>
+      <br>
+      <label>Degats : </label>
+      <span>{{hero.degats}}</span>
+      <br>
     </div>
   </div>
   <div *ngIf="update">
-    <h2>{{hero.name | uppercase}} Details</h2>
-    <form #formHero="ngForm" (ngSubmit)="onSubmit(formHero.value)">
+    <h2>{{hero.name | uppercase}} Mise a jour de votre Hero</h2>
+    <form #formHero="ngForm" (ngSubmit)="onSubmit()">
       <div>
-        <label for="hero-name-update">Mettre a jour votre hero: </label>
+        <label for="hero-name-update">Nom Hero: </label>
         <input type="text" id="hero-name-update" [(ngModel)]="hero.name" name="name" placeholder="Nom du hero">
+        <br>
+        <label for="hero-vie-update">Point de vie : </label>
+        <input type="text" id="hero-vie-update" [(ngModel)]="hero.pv" name="name" placeholder="point de vie du hero">
+        <br>
+        <label for="hero-attaque-update">Attaque Hero: </label>
+        <input type="text" id="hero-attaque-update" [(ngModel)]="hero.attaque" name="name" placeholder="attaque du hero">
+        <br>
+        <label for="hero-esquive-update">Esquive: </label>
+        <input type="text" id="hero-esquive-update" [(ngModel)]="hero.esquive" name="name" placeholder="esquive du hero">
+        <br>
+        <label for="hero-degats-update">Degats: </label>
+        <input type="text" id="hero-degats-update" [(ngModel)]="hero.degats" name="name" placeholder="degats du hero">
+        <br>
       </div>
       <button>Valider</button>
       <!--[disabled]="!form.valid"-->
     </form>
   </div>
+  <button>Utiliser {{hero.name}}</button>
 </div>
-<button (click)="goBack()">go back</button>
+<button (click)="goBack()">go back</button> <br>
+

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {HeroService } from '../Services/hero.service';
 import { Hero } from '../data/hero';
-import {Weapon} from '../data/Weapon';
+import {Weapon} from '../data/weapon';
 
 @Component({
   selector: 'app-add-hero',

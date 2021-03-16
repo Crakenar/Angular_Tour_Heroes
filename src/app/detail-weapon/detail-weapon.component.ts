@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {Location} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {WeaponsService} from '../Services/weapons.service';
-import {Weapon} from '../data/Weapon';
+import {Weapon} from '../data/weapon';
 
 @Component({
   selector: 'app-detail-weapon',

@@ -3,6 +3,9 @@ export class Weapon extends Serializable
 {
   id?: string;
   name?: string;
-  damage?: number;
-  weight?: number;
+  attaque?: number;
+  esquive?: number;
+  pv?: number;
+  degats?: number;
+
 }

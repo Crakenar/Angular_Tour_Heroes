@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 import {map} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
 
-import {Weapon} from '../data/Weapon';
+import {Weapon} from '../data/weapon';
 import { MessageService } from './messages.service';
 import {Hero} from '../data/hero';
 

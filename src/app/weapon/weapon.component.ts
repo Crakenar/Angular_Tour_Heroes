@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Weapon} from '../data/Weapon';
+import {Weapon} from '../data/weapon';
 import {WeaponsService} from '../Services/weapons.service';
 import {MessageService} from '../Services/messages.service';
 

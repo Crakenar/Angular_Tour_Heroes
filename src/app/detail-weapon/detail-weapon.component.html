@@ -7,8 +7,12 @@ Weapon Detail Component
     <label for="hero-name">Weapon name: </label>
     <input id="hero-name" [(ngModel)]="weapon.name" placeholder="name">
     <br>
-    <p>Degats de l'arme : {{weapon.damage}}</p>
-    <p>Poids de l'arme : {{weapon.weight}}</p>
+    <h3>Arme</h3>
+    <p>Nom : {{weapon.name}}</p>
+    <p>Degats : {{weapon.degats}}</p>
+    <p> Esquive : {{weapon.esquive}}</p>
+    <p> Attaque : {{weapon.attaque}}</p>
+    <p> Pv : {{weapon.pv}}</p>
   </div>
 </div>
 <button (click)="goBack()">go back</button>

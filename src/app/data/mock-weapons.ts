@@ -1,4 +1,4 @@
-import { Weapon } from './Weapon';
+import { Weapon } from './weapon';
 
 /*export const WEAPONS: Weapon[] = [
   {id: 1, name: 'Sword', damage: 10, weight: 10},

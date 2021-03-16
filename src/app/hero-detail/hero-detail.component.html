@@ -19,6 +19,9 @@ Hero Detail Component
       <label>Degats : </label>
       <span>{{hero.degats}}</span>
       <br>
+      <label>Arme : </label>
+      <span>{{hero.arme}}</span>
+      <br>
     </div>
   </div>
   <div *ngIf="update">
@@ -39,6 +42,9 @@ Hero Detail Component
         <br>
         <label for="hero-degats-update">Degats: </label>
         <input type="text" id="hero-degats-update" [(ngModel)]="hero.degats" name="name" placeholder="degats du hero">
+        <br>
+        <label for="hero-arme-update">Arme: </label>
+        <input type="text" id="hero-arme-update" [(ngModel)]="hero.arme" name="name" placeholder="Arme du hero">
         <br>
       </div>
       <button>Valider</button>

@@ -1,7 +1,24 @@
-<form #formHero="ngForm" (ngSubmit)="onSubmit()">
+<h2>Ajouter un Hero</h2>
+<form #formHero="ngForm" (ngSubmit)="onSubmit(formHero.value)">
   <div>
     <label for="hero-name">Ajouter un Hero: </label>
     <input type="text" id="hero-name" [(ngModel)]="name" name="name" placeholder="Nom du hero">
+    <br>
+    <label for="hero-pv">Point de vie : </label>
+    <input id="hero-pv" type="number" [(ngModel)]="pv" name="pv" placeholder="point de vie du hero">
+    <br>
+    <label>Attaque Hero: </label>
+    <input  type="number" [(ngModel)]="attaque" name="attaque" placeholder="attaque du hero">
+    <br>
+    <label>Esquive: </label>
+    <input type="number" [(ngModel)]="esquive" name="esquive" placeholder="esquive du hero">
+    <br>
+    <label >Degats: </label>
+    <input type="number" [(ngModel)]="degats" name="degats" placeholder="degats du hero">
+    <br>
+    <!--<label >Armes: </label>
+    <input type="text" [(ngModel)]="arme" name="arme" placeholder="arme du hero">
+    <br>-->
   </div>
   <button>Valider</button>
   <!--[disabled]="!form.valid"-->

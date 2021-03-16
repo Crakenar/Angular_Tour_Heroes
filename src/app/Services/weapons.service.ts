@@ -75,9 +75,9 @@ export class WeaponsService {
   }
 
 
-  // Création du service Firebase en fonction de l'id du héro
   private getWeaponDocument(id?: string): AngularFirestoreDocument<Hero> {
     // return document
+    // @ts-ignore
     return this.db.doc<Weapon>(WeaponsService.url + `/` + id);
   }
   /*getWeapon(id: number): Observable<Weapon | undefined> {

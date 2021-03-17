@@ -13,6 +13,7 @@ import { DetailWeaponComponent } from './detail-weapon/detail-weapon.component';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import { AddHeroComponent } from './add-hero/add-hero.component';
+import { AddWeaponComponent } from './add-weapon/add-weapon.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { AddHeroComponent } from './add-hero/add-hero.component';
     DashboardComponent,
     WeaponComponent,
     DetailWeaponComponent,
-    AddHeroComponent
+    AddHeroComponent,
+    AddWeaponComponent
   ],
   imports: [
     BrowserModule,

@@ -19,8 +19,11 @@ Hero Detail Component
       <label>Degats : </label>
       <span>{{hero.degats}}</span>
       <br>
-      <label>Arme : </label>
-      <span>{{hero.arme}}</span>
+      <div *ngIf="hero.arme != ''">
+        <a routerLink="/detailsWeapon/{{hero.arme}}">
+          <span  class="badge">Arme</span>
+        </a>
+      </div>
       <br>
     </div>
   </div>

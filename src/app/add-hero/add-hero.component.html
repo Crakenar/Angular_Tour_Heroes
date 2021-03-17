@@ -1,25 +1,47 @@
 <h2>Ajouter un Hero</h2>
-<form #formHero="ngForm" (ngSubmit)="onSubmit(formHero.value)">
+<h4 [ngClass]="{'points-incorrect': nbrPointRestant < 0,'points-correct': nbrPointRestant >= 0 }">Nombre de point Restants {{nbrPointRestant}}</h4>
+
+
+<form [formGroup]="heroForm" (ngSubmit)="onSubmit()" novalidate>
   <div>
     <label for="hero-name">Ajouter un Hero: </label>
-    <input type="text" id="hero-name" [(ngModel)]="name" name="name" placeholder="Nom du hero">
+    <input type="text" id="hero-name" formControlName="name" placeholder="Nom du hero">
+    <div *ngIf="getControl.name.touched && getControl.name.invalid" class="text-danger">
+      <div *ngIf="getControl.name.errors?.required">Name est requis.</div>
+      <div *ngIf="getControl.name.errors?.minlength">Minimum 4 characters.</div>
+    </div>
     <br>
     <label for="hero-pv">Point de vie : </label>
-    <input id="hero-pv" type="number" [(ngModel)]="pv" name="pv" placeholder="point de vie du hero">
+    <input id="hero-pv" min="1" type="number" formControlName="pv" placeholder="point de vie du hero">
+    <div *ngIf="getControl.pv.touched && getControl.pv.invalid" class="text-danger">
+      <div *ngIf="getControl.pv.errors?.required">pv est requis.</div>
+      <div *ngIf="getControl.pv.errors?.min">Minimum 1.</div>
+    </div>
     <br>
     <label>Attaque Hero: </label>
-    <input  type="number" [(ngModel)]="attaque" name="attaque" placeholder="attaque du hero">
+    <input  type="number" min="1" formControlName="attaque"  placeholder="attaque du hero">
+    <div *ngIf="getControl.attaque.touched && getControl.attaque.invalid" class="text-danger">
+      <div *ngIf="getControl.attaque.errors?.required">attaque est requis.</div>
+      <div *ngIf="getControl.attaque.errors?.min">Minimum 1.</div>
+    </div>
     <br>
     <label>Esquive: </label>
-    <input type="number" [(ngModel)]="esquive" name="esquive" placeholder="esquive du hero">
+    <input type="number" formControlName="esquive" placeholder="esquive du hero">
+    <div *ngIf="getControl.esquive.touched && getControl.esquive.invalid" class="text-danger">
+      <div *ngIf="getControl.esquive.errors?.required">esquive est requis.</div>
+      <div *ngIf="getControl.esquive.errors?.min">Minimum 1.</div>
+    </div>
     <br>
     <label >Degats: </label>
-    <input type="number" [(ngModel)]="degats" name="degats" placeholder="degats du hero">
+    <input type="number" min="1" formControlName="degats" placeholder="degats du hero">
+    <div *ngIf="getControl.degats.touched && getControl.degats.invalid" class="text-danger">
+      <div *ngIf="getControl.degats.errors?.required">degats est requis.</div>
+      <div *ngIf="getControl.degats.errors?.min">Minimum 1.</div>
+    </div>
     <br>
     <!--<label >Armes: </label>
     <input type="text" [(ngModel)]="arme" name="arme" placeholder="arme du hero">
     <br>-->
   </div>
-  <button>Valider</button>
-  <!--[disabled]="!form.valid"-->
+   <button type="submit" [disabled]="!heroForm.valid">Valider</button>
 </form>

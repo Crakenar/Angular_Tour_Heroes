@@ -1,5 +1,5 @@
 <h2>Ajouter un Hero</h2>
-<h4 [ngClass]="{'points-incorrect': nbrPointRestant < 0,'points-correct': nbrPointRestant >= 0 }">Nombre de point Restants {{nbrPointRestant}}</h4>
+<h5 [ngClass]="{'points-incorrect': nbrPointRestant < 0,'points-correct': nbrPointRestant >= 0 }">Nombre de point Restants {{nbrPointRestant}}</h5>
 
 
 <form [formGroup]="heroForm" (ngSubmit)="onSubmit()" novalidate>

@@ -14,6 +14,7 @@ export class HeroesComponent implements OnInit {
 
   heroes: Hero[] = [];
   itemFireBase?: Observable<any[]>;
+  sort = 'lk';
 
   constructor(private messageService: MessageService, private heroService: HeroService, private firestore: AngularFirestore) { }
 

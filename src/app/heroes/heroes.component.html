@@ -1,16 +1,47 @@
 <h2>L'ensemble des heros disponibles</h2>
 
 <input type="search" [(ngModel)]="sortInput">
-<div class="row" >
-  <div class="col-lg-3" *ngFor="let hero of heroes | filter:sortInput">
-    <a routerLink="/details/{{hero.id}}">
-      <span  class="badge">{{hero.id}}</span>  {{hero.name}}
-    </a>
-    <button (click)="delete(hero.id)">Delete</button>
-    <button routerLink="/details/{{hero.id}}/update">Update</button>
-  </div>
-</div>
+    <table>
+      <thead>
+      <tr>
+        <th (click)="sortDataByName('name')">Name</th>
+        <th (click)="sortDataByName('pv')">PV</th>
+        <th (click)="sortDataByName('attaque')">Attaque</th>
+        <th (click)="sortDataByName('esquive')">Esquive</th>
+        <th>Details du Hero</th>
+        <th>Update du Hero</th>
+        <th>Delete du Hero</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let hero of heroes | filter:sortInput">
+          <th>{{hero.name}}</th>
+          <th>{{hero.pv}}</th>
+          <th>{{hero.attaque}}</th>
+          <th>{{hero.esquive}}</th>
+          <th> <a routerLink="/details/{{hero.id}}">
+            <span  class="badge">{{hero.id}}</span>
+          </a></th>
+          <th>
+            <button (click)="delete(hero.id)">Delete</button>
+          </th>
+          <th>
+            <button routerLink="/details/{{hero.id}}/update">Update</button>
+          </th>
+        </tr>
+      </tbody>
+    </table>
 <a href="/addHero">Ajouter un Hero</a>
+
+
+<div>
+  <h4>Ce qu'il reste a faire pour hero</h4>
+  <ul>
+    <li>Un Hero doit avoir une arme</li>
+    <li>Preremplir le update</li>
+    <li>Bouton 'Utiliser le hero' => dashboard affiche ceux les plus utilises</li>
+  </ul>
+</div>
 
 
 <!--<ul class="heroes">

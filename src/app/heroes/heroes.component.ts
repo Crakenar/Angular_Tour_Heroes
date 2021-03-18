@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Hero} from '../data/hero';
 import {HeroService} from '../Services/hero.service';
 import {MessageService} from '../Services/messages.service';
@@ -14,13 +14,14 @@ export class HeroesComponent implements OnInit {
 
   heroes: Hero[] = [];
   itemFireBase?: Observable<any[]>;
-  sort = 'lk';
+  sortInput = '';
 
   constructor(private messageService: MessageService, private heroService: HeroService, private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
     this.getHeroes();
   }
+
   getHeroes(): void {
      this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
     // this.itemFireBase = this.firestore.collection('heroes').valueChanges();

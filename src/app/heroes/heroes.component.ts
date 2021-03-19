@@ -73,7 +73,7 @@ export class HeroesComponent implements OnInit {
         this.heroService.updateHero(value);
       }
    });
-   this.router.navigate(['/']);
+   this.router.navigate(['/battle/' + id]);
   }
 
 

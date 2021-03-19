@@ -15,6 +15,7 @@ import {environment} from '../environments/environment';
 import { AddHeroComponent } from './add-hero/add-hero.component';
 import { FilterPipePipe } from './filter-pipe.pipe';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { BattleComponent } from './battle/battle.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     DetailWeaponComponent,
     AddHeroComponent,
     FilterPipePipe,
+    BattleComponent,
   ],
   imports: [
     BrowserModule,

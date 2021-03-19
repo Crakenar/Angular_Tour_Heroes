@@ -6,6 +6,7 @@ import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { WeaponComponent} from './weapon/weapon.component';
 import {DetailWeaponComponent} from './detail-weapon/detail-weapon.component';
 import {AddHeroComponent} from './add-hero/add-hero.component';
+import {BattleComponent} from './battle/battle.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'details/:id/update', component: HeroDetailComponent},
   { path: 'detailsWeapon/:id', component: DetailWeaponComponent},
   { path: 'addHero', component: AddHeroComponent },
+  { path: 'battle/:id', component: BattleComponent },
   { path: '**', component: DashboardComponent}
 ];
 

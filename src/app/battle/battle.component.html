@@ -1,0 +1,50 @@
+<div class="row" style="margin-right: 6px">
+  <div class="col-lg-2">
+    <div *ngIf="hero">
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="https://image.freepik.com/vecteurs-libre/couple-super-heros_1284-16926.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{hero.name}}</h5>
+          <ul class="list-group">
+            <li class="list-group-item">Attaque : {{hero.attaque}}</li>
+            <li class="list-group-item">PV : {{hero.pv}}</li>
+            <li class="list-group-item">Esquive : {{hero.esquive}}</li>
+            <li class="list-group-item">Arme : {{hero.arme}}</li>
+            <li class="list-group-item">Point restants : {{hero.points}}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+
+  </div>
+  <div class="col-lg-2">
+    <!--COTE BOSS-->
+    <div *ngIf="bosses">
+      <!--AFFICHAGE DU BOSS EN COURS-->
+      <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="https://image.freepik.com/vecteurs-libre/couple-super-heros_1284-16926.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{bosses[0].name}}</h5>
+          <ul class="list-group">
+            <li class="list-group-item">Attaque : {{bosses[0].attaque}}</li>
+            <li class="list-group-item">PV : {{bosses[0].pv}}</li>
+            <li class="list-group-item">Esquive : {{bosses[0].esquive}}</li>
+            <li class="list-group-item">Nombre de Victoire : {{bosses[0].nbrVictoire}}</li>
+            <li class="list-group-item">Vaincu : {{bosses[0].vaincu}}</li>
+          </ul>
+        </div>
+      </div>
+      <!--AFFICHAGE DE LA LISTE DES BOSS-->
+      <div> <!--ngForOf-->
+        Restant des boss
+        <ul class="list-group">
+          <div *ngFor="let boss of bosses | slice:1; let i = index;">
+            <li class="list-group-item">{{boss.name}}</li>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

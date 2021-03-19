@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'details/:id/update', component: HeroDetailComponent},
   { path: 'detailsWeapon/:id', component: DetailWeaponComponent},
   { path: 'addHero', component: AddHeroComponent },
+  { path: '**', component: DashboardComponent}
 ];
 
 @NgModule({

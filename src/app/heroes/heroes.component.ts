@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Hero} from '../data/hero';
 import {HeroService} from '../Services/hero.service';
 import {MessageService} from '../Services/messages.service';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
@@ -16,15 +16,16 @@ export class HeroesComponent implements OnInit {
   sortInput = '';
   private isAscendingSort = false;
 
-  constructor(private messageService: MessageService, private heroService: HeroService, private firestore: AngularFirestore) { }
+  constructor(private messageService: MessageService, private heroService: HeroService, private router: Router) { }
   ngOnInit(): void {
     this.getHeroes();
   }
 
   // Operation on Data
   // https://sankhadip.medium.com/how-to-sort-table-rows-according-column-in-angular-9-b04fdafb4140
-  sortDataByName(attribute?: string): void {
+  sortDataBy(attribute?: string): void {
     console.log('sorting by name');
+    /*A FORMALISER C'EST PAS BEAU*/
     this.isAscendingSort = !this.isAscendingSort;
     switch (attribute){
       case 'name' :
@@ -38,6 +39,9 @@ export class HeroesComponent implements OnInit {
         break;
       case 'esquive':
         this.heroes.sort((hero1: any, hero2: any) => this.compareInt(hero1.esquive, hero2.esquive ));
+        break;
+      case 'usage':
+        this.heroes.sort((hero1: any, hero2: any) => this.compareInt(hero1.usage, hero2.usage ));
         break;
     }
   }
@@ -62,12 +66,20 @@ export class HeroesComponent implements OnInit {
     return compValue;
     }
 
+  addUsageHero(id: string): void{
+   this.heroes.forEach( value => {
+      if (value.id === id){
+        value.usage++;
+        this.heroService.updateHero(value);
+      }
+   });
+   this.router.navigate(['/']);
+  }
+
 
   // Database
   getHeroes(): void {
      this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
-    // this.itemFireBase = this.firestore.collection('heroes').valueChanges();
-     // console.log('heroes component itemfirebase :' + this.itemFireBase);
   }
 
   delete(id?: string): void {

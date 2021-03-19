@@ -1,20 +1,22 @@
 <h2>L'ensemble des heros disponibles</h2>
 
 <input type="search" [(ngModel)]="sortInput">
-    <table>
-      <thead>
+    <table class="table">
+      <thead class="thead-dark">
       <tr>
-        <th (click)="sortDataByName('name')">Name</th>
-        <th (click)="sortDataByName('pv')">PV</th>
-        <th (click)="sortDataByName('attaque')">Attaque</th>
-        <th (click)="sortDataByName('esquive')">Esquive</th>
-        <th>Details du Hero</th>
-        <th>Update du Hero</th>
-        <th>Delete du Hero</th>
+        <th scope="col" (click)="sortDataBy('usage')">Utiliser nombre de fois :</th>
+        <th scope="col" (click)="sortDataBy('name')">Name</th>
+        <th scope="col" (click)="sortDataBy('pv')">PV</th>
+        <th scope="col" (click)="sortDataBy('attaque')">Attaque</th>
+        <th scope="col" (click)="sortDataBy('esquive')">Esquive</th>
+        <th scope="col">Details du Hero</th>
+        <th scope="col">Update du Hero</th>
+        <th scope="col">Delete du Hero</th>
       </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let hero of heroes | filter:sortInput">
+        <tr scope="row" *ngFor="let hero of heroes | filter:sortInput">
+          <th>{{hero.usage}}</th>
           <th>{{hero.name}}</th>
           <th>{{hero.pv}}</th>
           <th>{{hero.attaque}}</th>
@@ -28,6 +30,7 @@
           <th>
             <button routerLink="/details/{{hero.id}}/update">Update</button>
           </th>
+          <th><button (click)="addUsageHero(hero.id)">Uiliser {{hero.name}}</button> </th>
         </tr>
       </tbody>
     </table>
@@ -39,7 +42,6 @@
   <ul>
     <li>Un Hero doit avoir une arme</li>
     <li>Preremplir le update</li>
-    <li>Bouton 'Utiliser le hero' => dashboard affiche ceux les plus utilises</li>
   </ul>
 </div>
 

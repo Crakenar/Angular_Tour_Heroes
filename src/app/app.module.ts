@@ -16,6 +16,7 @@ import { AddHeroComponent } from './add-hero/add-hero.component';
 import { FilterPipePipe } from './filter-pipe.pipe';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import { BattleComponent } from './battle/battle.component';
+import { CarreComponent } from './carre/carre.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { BattleComponent } from './battle/battle.component';
     AddHeroComponent,
     FilterPipePipe,
     BattleComponent,
+    CarreComponent,
   ],
   imports: [
     BrowserModule,

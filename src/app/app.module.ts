@@ -13,8 +13,10 @@ import { DetailWeaponComponent } from './detail-weapon/detail-weapon.component';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import { AddHeroComponent } from './add-hero/add-hero.component';
-import { AddWeaponComponent } from './add-weapon/add-weapon.component';
-
+import { FilterPipePipe } from './filter-pipe.pipe';
+import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { BattleComponent } from './battle/battle.component';
+import { CarreComponent } from './carre/carre.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { AddWeaponComponent } from './add-weapon/add-weapon.component';
     WeaponComponent,
     DetailWeaponComponent,
     AddHeroComponent,
-    AddWeaponComponent
+    FilterPipePipe,
+    BattleComponent,
+    CarreComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,8 @@ import { AddWeaponComponent } from './add-weapon/add-weapon.component';
     FormsModule,
     AngularFireModule,
     AngularFireModule.initializeApp(environment.firebase),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

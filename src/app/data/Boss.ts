@@ -1,15 +1,13 @@
 import {Serializable} from './serializable';
 
-export class  Hero extends Serializable
+export class  Boss extends Serializable
 {
-  // id?: string;
   id?: string;
   name?: string;
   attaque?: number;
   esquive?: number;
   degats?: number;
   pv?: number;
-  points = 40;
-  arme?: string;
-  usage = 0;
+  nbrVictoire = 0;
+  vaincu = 0;
 }

@@ -1,27 +1,49 @@
-<!--<span>Details de mon hero : {{hero.name | uppercase }}</span>
-<p>Id : {{hero.id}}</p>
-<p>Nom : {{hero.name}}</p>
-
-<div>
-  <label for="name">Hero Name :</label>
-  <input type="name" [(ngModel)]="hero.name" placeholder="nom du heros">
-</div>
- (click)="onSelect(hero)"
-      [class.selected]="hero === selectedHero"
--->
-
 <h2>L'ensemble des heros disponibles</h2>
 
-<div class="row" >
-  <div class="col-lg-3" *ngFor="let hero of heroes">
-    <a routerLink="/details/{{hero.id}}">
-      <span  class="badge">{{hero.id}}</span>  {{hero.name}}
-    </a>
-    <button (click)="delete(hero.id)">Delete</button>
-    <button routerLink="/details/{{hero.id}}/update">Update</button>
-  </div>
-</div>
+<input type="search" [(ngModel)]="sortInput">
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col" (click)="sortDataBy('usage')">Utiliser nombre de fois :</th>
+        <th scope="col" (click)="sortDataBy('name')">Name</th>
+        <th scope="col" (click)="sortDataBy('pv')">PV</th>
+        <th scope="col" (click)="sortDataBy('attaque')">Attaque</th>
+        <th scope="col" (click)="sortDataBy('esquive')">Esquive</th>
+        <th scope="col">Details du Hero</th>
+        <th scope="col">Update du Hero</th>
+        <th scope="col">Delete du Hero</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr scope="row" *ngFor="let hero of heroes | filter:sortInput">
+          <th>{{hero.usage}}</th>
+          <th>{{hero.name}}</th>
+          <th>{{hero.pv}}</th>
+          <th>{{hero.attaque}}</th>
+          <th>{{hero.esquive}}</th>
+          <th> <a routerLink="/details/{{hero.id}}">
+            <span  class="badge">{{hero.id}}</span>
+          </a></th>
+          <th>
+            <button (click)="delete(hero.id)">Delete</button>
+          </th>
+          <th>
+            <button routerLink="/details/{{hero.id}}/update">Update</button>
+          </th>
+          <th><button (click)="addUsageHero(hero.id)">Uiliser {{hero.name}}</button> </th>
+        </tr>
+      </tbody>
+    </table>
 <a href="/addHero">Ajouter un Hero</a>
+
+
+<div>
+  <h4>Ce qu'il reste a faire pour hero</h4>
+  <ul>
+    <li>Un Hero doit avoir une arme</li>
+    <li>Preremplir le update</li>
+  </ul>
+</div>
 
 
 <!--<ul class="heroes">

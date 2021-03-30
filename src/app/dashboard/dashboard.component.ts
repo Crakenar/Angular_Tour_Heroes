@@ -33,7 +33,7 @@ export class DashboardComponent implements OnInit {
     // @ts-ignore
     this.heroService.getHeroes().pipe(max<Hero>((a: Hero, b: Hero) => a.usage < b.usage ? -1 : 1))
       .subscribe(hereos => this.heroMostUsed = hereos);
-    console.log('most used : ' + this.heroMostUsed);
+    // console.log('most used : ' + this.heroMostUsed);
   }*/
 
   constructor(private messageService: MessageService, private heroService: HeroService) { }
@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
     this.heroMostUsed = this.heroes.find(o => {
       return o.usage === maxUsage;
     });
-    console.log('after content' + this.heroes);
+    // console.log('after content' + this.heroes);
   }
 
 }

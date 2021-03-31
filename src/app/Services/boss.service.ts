@@ -19,10 +19,10 @@ export class BossService {
       .snapshotChanges()
       .pipe(
         map(liste => {
-          // // console.log('getBosses()');
+          // console.log('getBosses()');
           return liste.map(item => {
             const data = item.payload.doc.data();
-            // // console.log(data);
+            // console.log(data);
             const boss = new Boss().fromJSON(data);
             const id = item.payload.doc.id;
             boss.id = id;
@@ -50,10 +50,11 @@ export class BossService {
   }
 
   // Modification d'un héro
-  updateBoss(boss?: Boss | undefined): void {
+  updateBoss(boss?: Boss | undefined): Promise<Boss> {
     // Update document
     // @ts-ignore
-    this.getHeroDocument(boss.id).update(Object.assign({}, boss));
+    return this.getBossDocument(boss.id).update(Object.assign({}, boss));
+   //  return Promise.resolve();
   }
 
   deleteBoss(id?: string): void {

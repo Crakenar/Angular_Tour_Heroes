@@ -32,19 +32,30 @@ export class BattleComponent implements OnInit {
     this.getBosses();
     this.newGame();
   }
+
+  /**
+   * Game MECHANICS
+   */
   // Winner = X => Hero attaque boss
-  attaque(): void {
+  attack(): void {
     if (this.winner === 'X'){
       if (this.hero && this.hero.attaque && this.hero.degats){
-        const attaqueDmg = (-this.hero.attaque) + (-this.hero.degats);
+        const attackDmg = (-this.hero.attaque) + (-this.hero.degats);
         if (this.bosses.length && this.bosses[0].pv){
-          this.bosses[0].pv = this.bosses[0].pv + attaqueDmg;
+          this.bosses[0].pv = this.bosses[0].pv + attackDmg;
+        }
+      }
+    }else if (this.winner === 'O'){
+      if (this.bosses[0] && this.bosses[0].attaque && this.bosses[0].degats){
+        const attackDmg = (-this.bosses[0].attaque) + (-this.bosses[0].degats);
+        if (this.hero && this.hero.pv){
+          this.hero.pv = this.hero.pv + attackDmg;
         }
       }
     }
   }
 
-
+  // Reset Grille Jeu
   newGame(): void {
     this.squares = Array(9).fill(null);
     this.winner = '';
@@ -63,10 +74,18 @@ export class BattleComponent implements OnInit {
       }
     }
     this.winner = this.calculateWinner();
-    this.attaque();
+    this.attack();
     if (this.isBossDead()) {
       if (this.bosses.length){
         this.bosses[0].vaincu++;
+        this.bosses[0].pv = 1;
+        this.bossService.updateBoss(this.bosses[0]).then( res =>
+          this.checkIfOpponents()
+        );
+      }
+    }else if (this.isHeroDead()){
+      if (this.bosses.length){
+        this.bosses[0].nbrVictoire++;
         this.bosses[0].pv = 1;
         this.bossService.updateBoss(this.bosses[0]).then( res =>
           this.checkIfOpponents()
@@ -76,7 +95,17 @@ export class BattleComponent implements OnInit {
   }
 
 
-  // Condition on this.bosses Array
+  isHeroDead(): boolean {
+    if (this.hero.pv){
+      return this.hero.pv <= 0;
+    }else{
+      return false;
+    }
+  }
+
+  /**
+   * Condition on this.bosses Array
+   */
   isBossDead(): boolean{
     if (this.bosses[0].pv){
       return this.bosses[0].pv <= 0;
@@ -85,9 +114,17 @@ export class BattleComponent implements OnInit {
     }
   }
   checkIfOpponents(): void {
-    this.bosses.splice(0, 1);
-    if (this.bosses.length === 0){
-      this.router.navigate(['/']);
+    if (this.hero && this.hero.pv){
+      if (this.hero.pv <= 0){
+        this.router.navigate(['/']);
+      }else{
+        this.bosses.splice(0, 1);
+        if (this.bosses.length === 0){
+          this.router.navigate(['/']);
+        }else{
+          this.newGame();
+        }
+      }
     }
   }
 

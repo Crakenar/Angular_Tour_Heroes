@@ -16,6 +16,7 @@ export class CarreComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
 }

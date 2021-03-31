@@ -1,5 +1,5 @@
 Weapon Detail Component
-<div *ngIf="weapon">
+<div *ngIf="weapon && !update">
   <h2>{{weapon.name | uppercase}} Details</h2>
   <div><span>id: </span>{{weapon.id}}</div>
   <br>
@@ -14,5 +14,8 @@ Weapon Detail Component
     <p> Attaque : {{weapon.attaque}}</p>
     <p> Pv : {{weapon.pv}}</p>
   </div>
+</div>
+<div *ngIf="update">
+  <h1>WORKSSS</h1>
 </div>
 <button (click)="goBack()">go back</button>

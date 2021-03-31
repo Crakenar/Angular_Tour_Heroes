@@ -26,13 +26,13 @@ export class HeroService {
       .pipe(
         map(liste => {
           // log
-          console.log('getHeroes()');
+          // // console.log('getHeroes()');
           // Traitement de la liste
           return liste.map(item => {
             // Get document data
             const data = item.payload.doc.data();
             // New Hero
-            console.log(data);
+            //// console.log(data);
             const hero = new Hero().fromJSON(data);
             // Get document id
             const id = item.payload.doc.id;
@@ -40,8 +40,8 @@ export class HeroService {
             // hero.id = +id;
             hero.id = id;
             // log
-            console.log('   hero ' + id);
-            console.log(hero);
+            // // console.log('   hero ' + id);
+            // // console.log(hero);
             // Use spread operator to add the id to the document data
             return hero;
           });
@@ -60,8 +60,8 @@ export class HeroService {
           const hero = new Hero().fromJSON(data);
           hero.id = id;
           // log
-          console.log('getHero(' + id + ')');
-          console.log(hero);
+          // // console.log('getHero(' + id + ')');
+          // // console.log(hero);
           // Use spread operator to add the id to the document data
           return hero;
         })

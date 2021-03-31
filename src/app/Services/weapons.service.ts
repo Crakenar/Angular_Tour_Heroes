@@ -24,15 +24,15 @@ export class WeaponsService {
       .pipe(
         map(liste => {
           // log
-          console.log('getWeapons()');
+          // // console.log('getWeapons()');
           return liste.map(item => {
             const data = item.payload.doc.data();
-            console.log(data);
+            // console.log(data);
             const weapon = new Weapon().fromJSON(data);
             const id = item.payload.doc.id;
             weapon.id = id;
-            console.log('   weapon ' + id);
-            console.log(weapon);
+            // console.log('   weapon ' + id);
+            // console.log(weapon);
             return weapon;
           });
         })
@@ -49,8 +49,8 @@ export class WeaponsService {
           const weapon = new Weapon().fromJSON(data);
           weapon.id = id;
           // log
-          console.log('getWeapon(' + id + ')');
-          console.log(weapon);
+          // console.log('getWeapon(' + id + ')');
+          // console.log(weapon);
           // Use spread operator to add the id to the document data
           return weapon;
         })

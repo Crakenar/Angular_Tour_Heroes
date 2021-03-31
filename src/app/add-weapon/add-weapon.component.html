@@ -1,0 +1,62 @@
+<h2>Ajouter une arme</h2>
+<h5 [ngClass]="{'points-incorrect': nbrPointRestant != 0,'points-correct': nbrPointRestant == 0 }"> Somme totale : {{nbrPointRestant}} (doit valoir 0) </h5>
+
+
+<form [formGroup]="weaponForm" (ngSubmit)="onSubmit()" novalidate>
+  <div>
+    <label for="weapon
+    -name">Ajouter une arme: </label>
+    <input type="text" id="weapon
+    -name" formControlName="name" placeholder="Nom du weapon
+">
+    <div *ngIf="getControl.name.touched && getControl.name.invalid" class="text-danger">
+      <div *ngIf="getControl.name.errors?.required">Name est requis.</div>
+      <div *ngIf="getControl.name.errors?.minlength">Minimum 4 characters.</div>
+    </div>
+    <br>
+    <label for="weapon
+    -pv">Point de vie : </label>
+    <input id="weapon
+    -pv" min="5" max="5" type="number" formControlName="pv" placeholder="point de vie du weapon
+">
+    <div *ngIf="getControl.pv.touched && getControl.pv.invalid" class="text-danger">
+      <div *ngIf="getControl.pv.errors?.required">pv est requis.</div>
+      <div *ngIf="getControl.pv.errors?.min">Minimum -5.</div>
+      <div *ngIf="getControl.pv.errors?.max">Maximum +5.</div>
+    </div>
+    <br>
+    <label>Attaque: </label>
+    <input  type="number" min="1" max="5" formControlName="attaque"  placeholder="attaque du weapon
+">
+    <div *ngIf="getControl.attaque.touched && getControl.attaque.invalid" class="text-danger">
+      <div *ngIf="getControl.attaque.errors?.required">attaque est requis.</div>
+      <div *ngIf="getControl.attaque.errors?.min">Minimum -5.</div>
+      <div *ngIf="getControl.attaque.errors?.max">Minimum +5.</div>
+    </div>
+    <br>
+    <label>Esquive: </label>
+    <input type="number" min="-5" max="5" formControlName="esquive" placeholder="esquive du weapon
+">
+    <div *ngIf="getControl.esquive.touched && getControl.esquive.invalid" class="text-danger">
+      <div *ngIf="getControl.esquive.errors?.required">esquive est requis.</div>
+      <div *ngIf="getControl.esquive.errors?.min">Minimum -5.</div>
+      <div *ngIf="getControl.esquive.errors?.max">Maximum +5</div>
+
+    </div>
+    <br>
+    <label >Degats: </label>
+    <input type="number" min="-5" max="5" formControlName="degats" placeholder="degats du weapon
+">
+    <div *ngIf="getControl.degats.touched && getControl.degats.invalid" class="text-danger">
+      <div *ngIf="getControl.degats.errors?.required">degats est requis.</div>
+      <div *ngIf="getControl.degats.errors?.min">Minimum -5.</div>
+      <div *ngIf="getControl.degats.errors?.max">Maximum +5.</div>
+    </div>
+    <br>
+    <!--<label >Armes: </label>
+    <input type="text" [(ngModel)]="arme" name="arme" placeholder="arme du weapon
+    ">
+    <br>-->
+  </div>
+  <button type="submit" [disabled]="!weaponForm.valid">Valider</button>
+</form>

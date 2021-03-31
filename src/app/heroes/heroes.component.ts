@@ -24,7 +24,7 @@ export class HeroesComponent implements OnInit {
   // Operation on Data
   // https://sankhadip.medium.com/how-to-sort-table-rows-according-column-in-angular-9-b04fdafb4140
   sortDataBy(attribute?: string): void {
-    console.log('sorting by name');
+    // console.log('sorting by name');
     /*A FORMALISER C'EST PAS BEAU*/
     this.isAscendingSort = !this.isAscendingSort;
     switch (attribute){

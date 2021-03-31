@@ -39,6 +39,14 @@
       <div *ngIf="getControl.degats.errors?.min">Minimum 1.</div>
     </div>
     <br>
+    <label for="cars">Choisir une arme:</label>
+    <select name="weapons" id="weapon">
+      <option value="">--</option>
+      <option *ngFor="let weapon of weapons; index as i; first as isFirst">
+        {{weapon.name}} - Attaque : {{weapon.attaque}}
+      </option>
+    </select>
+    <br>
     <!--<label >Armes: </label>
     <input type="text" [(ngModel)]="arme" name="arme" placeholder="arme du hero">
     <br>-->

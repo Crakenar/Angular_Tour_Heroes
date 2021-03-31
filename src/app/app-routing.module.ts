@@ -12,6 +12,9 @@ import {VictoryDefeatScreenComponent} from './first-game/victory-defeat-screen/v
 import {GamesSelectComponent} from './games-select/games-select.component';
 import {MiniZeldaGameComponent} from './second-game/mini-zelda-game/mini-zelda-game.component';
 
+
+
+// Il faut fair du lazy load avec Children:
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },

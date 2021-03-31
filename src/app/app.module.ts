@@ -20,6 +20,8 @@ import { BattleComponent } from './battle/battle.component';
 import { CarreComponent } from './carre/carre.component';
 import { VictoryDefeatScreenComponent } from './victory-defeat-screen/victory-defeat-screen.component';
 import { GamesSelectComponent } from './games-select/games-select.component';
+import { MiniZeldaGameComponent } from './mini-zelda-game/mini-zelda-game.component';
+import { PersonnageComponent } from './personnage/personnage.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { GamesSelectComponent } from './games-select/games-select.component';
     CarreComponent,
     VictoryDefeatScreenComponent,
     GamesSelectComponent,
+    MiniZeldaGameComponent,
+    PersonnageComponent,
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import {BattleComponent} from './battle/battle.component';
 import {AddWeaponComponent} from './add-weapon/add-weapon.component';
 import {VictoryDefeatScreenComponent} from './victory-defeat-screen/victory-defeat-screen.component';
 import {GamesSelectComponent} from './games-select/games-select.component';
+import {MiniZeldaGameComponent} from './mini-zelda-game/mini-zelda-game.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'battle/:id', component: BattleComponent },
   { path: 'victory-defeat-screen', component: VictoryDefeatScreenComponent },
   { path: 'game-select', component: GamesSelectComponent },
+  { path: 'zelda-game', component: MiniZeldaGameComponent },
   { path: '**', component: DashboardComponent}
 ];
 

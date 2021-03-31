@@ -14,6 +14,8 @@ import {first} from 'rxjs/operators';
   styleUrls: ['./battle.component.css']
 })
 export class BattleComponent implements OnInit {
+  private static PV = 1;
+
   hero: Hero = {} as Hero;
   bosses: Boss[] = [];
   boss?: Boss;
@@ -81,7 +83,7 @@ export class BattleComponent implements OnInit {
     if (this.isBossDead()) {
       if (this.bosses.length){
         this.bosses[0].vaincu++;
-        this.bosses[0].pv = 100;
+        this.bosses[0].pv = BattleComponent.PV;
         this.bossService.updateBoss(this.bosses[0]).then( res =>
           this.checkIfOpponents()
         );
@@ -89,7 +91,7 @@ export class BattleComponent implements OnInit {
     }else if (this.isHeroDead()){
       if (this.bosses.length){
         this.bosses[0].nbrVictoire++;
-        this.bosses[0].pv = 100;
+        this.bosses[0].pv = BattleComponent.PV;
         this.bossService.updateBoss(this.bosses[0]).then( res =>
           this.checkIfOpponents()
         );

@@ -1,0 +1,13 @@
+.btn {
+  height: 200px!important;
+  width: 200px!important;
+  margin: 5%;
+}
+
+main {
+  text-align: center;
+}
+
+.btn btn-warning {
+  background-color: rgba(252, 236, 3, 1);
+}

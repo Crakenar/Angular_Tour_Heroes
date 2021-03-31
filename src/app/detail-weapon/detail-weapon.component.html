@@ -4,8 +4,8 @@ Weapon Detail Component
   <div><span>id: </span>{{weapon.id}}</div>
   <br>
   <div>
-    <label for="hero-name">Weapon name: </label>
-    <input id="hero-name" [(ngModel)]="weapon.name" placeholder="name">
+    <label for="weapon-name">Weapon name: </label>
+    <input id="weapon-name" [(ngModel)]="weapon.name" placeholder="name">
     <br>
     <h3>Arme</h3>
     <p>Nom : {{weapon.name}}</p>
@@ -15,7 +15,28 @@ Weapon Detail Component
     <p> Pv : {{weapon.pv}}</p>
   </div>
 </div>
-<div *ngIf="update">
-  <h1>WORKSSS</h1>
+<div *ngIf="update && weapon">
+  <h2>{{weapon.name | uppercase}} Mise a jour de votre Hero</h2>
+  <form #formHero="ngForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="weapon-name-update">Nom Hero: </label>
+      <input type="text" id="weapon-name-update" [(ngModel)]="weapon.name" name="name" placeholder="Nom du weapon">
+      <br>
+      <label for="weapon-vie-update">Point de vie : </label>
+      <input type="text" id="weapon-vie-update" [(ngModel)]="weapon.pv" name="pv" placeholder="point de vie du weapon">
+      <br>
+      <label for="weapon-attaque-update">Attaque Hero: </label>
+      <input type="text" id="weapon-attaque-update" [(ngModel)]="weapon.attaque" name="attaque" placeholder="attaque du weapon">
+      <br>
+      <label for="weapon-esquive-update">Esquive: </label>
+      <input type="text" id="weapon-esquive-update" [(ngModel)]="weapon.esquive" name="esquive" placeholder="esquive du weapon">
+      <br>
+      <label for="weapon-degats-update">Degats: </label>
+      <input type="text" id="weapon-degats-update" [(ngModel)]="weapon.degats" name="degats" placeholder="degats du weapon">
+      <br>
+    </div>
+    <button>Valider</button>
+    <!--[disabled]="!form.valid"-->
+  </form>
 </div>
 <button (click)="goBack()">go back</button>

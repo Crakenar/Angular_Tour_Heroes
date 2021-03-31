@@ -38,7 +38,8 @@ export class WeaponsService {
         })
       );
   }
-  getWeapon(id: string): Observable<Weapon> {
+
+    getWeapon(id: string | undefined): Observable<Weapon> {
     // Return hero observable
     return this.getWeaponDocument(id).snapshotChanges()
       .pipe(

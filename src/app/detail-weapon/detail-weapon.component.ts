@@ -42,6 +42,11 @@ export class DetailWeaponComponent implements OnInit {
     }
   }
 
+  onSubmit(): void {
+    this.weaponService.updateWeapon(this.weapon);
+    this.goBack();
+  }
+
   goBack(): void {
     this.location.back();
   }

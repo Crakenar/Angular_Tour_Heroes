@@ -2,6 +2,7 @@
 #env
 /src/environments/*
 # compiled output
+/node_modules/*
 /dist
 /tmp
 /out-tsc

@@ -39,10 +39,10 @@
       <div *ngIf="getControl.degats.errors?.min">Minimum 1.</div>
     </div>
     <br>
-    <label for="cars">Choisir une arme:</label>
-    <select name="weapons" id="weapon">
+    <label for="weapon">Choisir une arme:</label>
+    <select formControlName="id_weapon" name="weapons" id="weapon">
       <option value="">--</option>
-      <option *ngFor="let weapon of weapons; index as i; first as isFirst">
+      <option *ngFor="let weapon of weapons; index as i; first as isFirst" [value]="weapon.id">
         {{weapon.name}} - Attaque : {{weapon.attaque}}
       </option>
     </select>

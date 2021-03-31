@@ -19,10 +19,21 @@ Hero Detail Component
       <label>Degats : </label>
       <span>{{hero.degats}}</span>
       <br>
-      <div *ngIf="hero.arme != ''">
-        <a routerLink="/detailsWeapon/{{hero.arme}}">
-          <span  class="badge">Arme</span>
-        </a>
+      <div *ngIf="weapon">
+        <h3>Arme : {{weapon.name}}</h3>
+        <label>Attaque : </label>
+        <span>{{weapon.attaque}}</span>
+        <br>
+        <label>Degats : </label>
+        <span>{{weapon.degats}}</span>
+        <br>
+        <label>Esquive : </label>
+        <span>{{weapon.esquive}}</span>
+        <br>
+        <label>PV : </label>
+        <span>{{weapon.pv}}</span>
+        <br>
+
       </div>
       <br>
     </div>
@@ -35,19 +46,24 @@ Hero Detail Component
         <input type="text" id="hero-name-update" [(ngModel)]="hero.name" name="name" placeholder="Nom du hero">
         <br>
         <label for="hero-vie-update">Point de vie : </label>
-        <input type="text" id="hero-vie-update" [(ngModel)]="hero.pv" name="name" placeholder="point de vie du hero">
+        <input type="text" id="hero-vie-update" [(ngModel)]="hero.pv" name="pv" placeholder="point de vie du hero">
         <br>
         <label for="hero-attaque-update">Attaque Hero: </label>
-        <input type="text" id="hero-attaque-update" [(ngModel)]="hero.attaque" name="name" placeholder="attaque du hero">
+        <input type="text" id="hero-attaque-update" [(ngModel)]="hero.attaque" name="attaque" placeholder="attaque du hero">
         <br>
         <label for="hero-esquive-update">Esquive: </label>
-        <input type="text" id="hero-esquive-update" [(ngModel)]="hero.esquive" name="name" placeholder="esquive du hero">
+        <input type="text" id="hero-esquive-update" [(ngModel)]="hero.esquive" name="esquive" placeholder="esquive du hero">
         <br>
         <label for="hero-degats-update">Degats: </label>
-        <input type="text" id="hero-degats-update" [(ngModel)]="hero.degats" name="name" placeholder="degats du hero">
+        <input type="text" id="hero-degats-update" [(ngModel)]="hero.degats" name="degats" placeholder="degats du hero">
         <br>
-        <label for="hero-arme-update">Arme: </label>
-        <input type="text" id="hero-arme-update" [(ngModel)]="hero.arme" name="name" placeholder="Arme du hero">
+        <label for="weapon">Choisir une arme:</label>
+        <select name="id_weapon" id="weapon" [(ngModel)]="hero.id_weapon">
+          <option value="">--</option>
+          <option *ngFor="let weapon of weapons; index as i; first as isFirst" [value]="weapon.id">
+            {{weapon.name}} - Attaque : {{weapon.attaque}}
+          </option>
+        </select>
         <br>
       </div>
       <button>Valider</button>

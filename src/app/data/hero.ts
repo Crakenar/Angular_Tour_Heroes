@@ -10,6 +10,6 @@ export class  Hero extends Serializable
   degats?: number;
   pv?: number;
   points = 40;
-  arme?: string;
+  id_weapon?: string;
   usage = 0;
 }

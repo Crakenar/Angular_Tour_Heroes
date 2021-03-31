@@ -25,7 +25,7 @@ export class AddHeroComponent implements OnInit {
       attaque: ['', [Validators.required, Validators.min(1), Validators.max(37)]],
       degats: ['', [Validators.required, Validators.min(1), Validators.max(37)]],
       esquive: ['', [Validators.required, Validators.min(1), Validators.max(37)]],
-      weapon: ['', [Validators.required]],
+      id_weapon: [''],
     });
   }
 

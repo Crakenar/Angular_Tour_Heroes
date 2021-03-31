@@ -1,5 +1,5 @@
 <h2>Ajouter une arme</h2>
-<h5 [ngClass]="{'points-incorrect': nbrPointRestant != 0,'points-correct': nbrPointRestant == 0 }"> Somme totale : {{nbrPointRestant}} (doit valoir 0) </h5>
+<h5 [ngClass]="{'points-incorrect': sommeTotalePoints != 0,'points-correct': sommeTotalePoints == 0 }"> Somme totale : {{sommeTotalePoints}} (doit valoir 0) </h5>
 
 
 <form [formGroup]="weaponForm" (ngSubmit)="onSubmit()" novalidate>
@@ -58,5 +58,5 @@
     ">
     <br>-->
   </div>
-  <button type="submit" [disabled]="!weaponForm.valid">Valider</button>
+  <button type="submit" [disabled]="sommeTotalePoints != 0">Valider</button>
 </form>

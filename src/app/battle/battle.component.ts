@@ -4,6 +4,7 @@ import {HeroService} from '../Services/hero.service';
 import {Boss} from '../data/Boss';
 import {Hero} from '../data/hero';
 import {BossService} from '../Services/boss.service';
+import { SendDataThroughComponentsService } from '../Services/send-data-through-components.service';
 import {error} from '@angular/compiler/src/util';
 import {first} from 'rxjs/operators';
 
@@ -24,7 +25,9 @@ export class BattleComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private heroService: HeroService,
-              private bossService: BossService) {
+              private bossService: BossService,
+              private transfertService: SendDataThroughComponentsService
+              ) {
   }
 
   ngOnInit(): void {
@@ -116,11 +119,13 @@ export class BattleComponent implements OnInit {
   checkIfOpponents(): void {
     if (this.hero && this.hero.pv){
       if (this.hero.pv <= 0){
-        this.router.navigate(['/']);
+        this.transfertService.setData('defeat');
+        this.router.navigate(['/victory-defeat-screen']);
       }else{
         this.bosses.splice(0, 1);
         if (this.bosses.length === 0){
-          this.router.navigate(['/']);
+          this.transfertService.setData('victory');
+          this.router.navigate(['/victory-defeat-screen']);
         }else{
           this.newGame();
         }

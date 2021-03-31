@@ -19,6 +19,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import { BattleComponent } from './battle/battle.component';
 import { CarreComponent } from './carre/carre.component';
 import { VictoryDefeatScreenComponent } from './victory-defeat-screen/victory-defeat-screen.component';
+import { GamesSelectComponent } from './games-select/games-select.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { VictoryDefeatScreenComponent } from './victory-defeat-screen/victory-de
     BattleComponent,
     CarreComponent,
     VictoryDefeatScreenComponent,
+    GamesSelectComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import {HeroService} from '../Services/hero.service';
 import {MessageService} from '../Services/messages.service';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
+import {SendDataThroughComponentsService} from '../Services/send-data-through-components.service';
 
 @Component({
   selector: 'app-heroes',
@@ -16,7 +17,11 @@ export class HeroesComponent implements OnInit {
   sortInput = '';
   private isAscendingSort = false;
 
-  constructor(private messageService: MessageService, private heroService: HeroService, private router: Router) { }
+  constructor(
+    private messageService: MessageService,
+    private heroService: HeroService,
+    private transfertService: SendDataThroughComponentsService,
+    private router: Router) { }
   ngOnInit(): void {
     this.getHeroes();
   }
@@ -73,7 +78,12 @@ export class HeroesComponent implements OnInit {
         this.heroService.updateHero(value);
       }
    });
-   this.router.navigate(['/battle/' + id]);
+   // this.router.navigate(['/battle/' + id]);
+    // teo
+   this.router.navigate(['game-select']);
+   this.transfertService.setData({
+     idHero : id
+   });
   }
 
 

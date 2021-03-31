@@ -1,0 +1,23 @@
+main {
+ text-align: center;
+}
+
+
+.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+button {
+  margin: 2%;
+  height: 200px!important;
+}
+
+.left-side {
+  background-color: rgba(66, 135, 245, 1);
+}
+
+.right-side {
+  background-color: rgba(50, 168, 82, 1);
+}
+

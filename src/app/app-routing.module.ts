@@ -9,6 +9,7 @@ import {AddHeroComponent} from './add-hero/add-hero.component';
 import {BattleComponent} from './battle/battle.component';
 import {AddWeaponComponent} from './add-weapon/add-weapon.component';
 import {VictoryDefeatScreenComponent} from './victory-defeat-screen/victory-defeat-screen.component';
+import {GamesSelectComponent} from './games-select/games-select.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'addWeapon', component: AddWeaponComponent },
   { path: 'battle/:id', component: BattleComponent },
   { path: 'victory-defeat-screen', component: VictoryDefeatScreenComponent },
+  { path: 'game-select', component: GamesSelectComponent },
   { path: '**', component: DashboardComponent}
 ];
 

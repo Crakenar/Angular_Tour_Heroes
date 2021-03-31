@@ -7,14 +7,13 @@ import {SendDataThroughComponentsService} from '../Services/send-data-through-co
   styleUrls: ['./victory-defeat-screen.component.css']
 })
 export class VictoryDefeatScreenComponent implements OnInit {
-  private data: any;
+  data: any;
   constructor(
     private transfertService: SendDataThroughComponentsService
   ) { }
 
   ngOnInit(): void {
     this.data = this.transfertService.getData();
-    console.log(this.data);
   }
 
 }

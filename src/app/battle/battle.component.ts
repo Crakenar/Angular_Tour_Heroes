@@ -81,7 +81,7 @@ export class BattleComponent implements OnInit {
     if (this.isBossDead()) {
       if (this.bosses.length){
         this.bosses[0].vaincu++;
-        this.bosses[0].pv = 1;
+        this.bosses[0].pv = 100;
         this.bossService.updateBoss(this.bosses[0]).then( res =>
           this.checkIfOpponents()
         );
@@ -89,7 +89,7 @@ export class BattleComponent implements OnInit {
     }else if (this.isHeroDead()){
       if (this.bosses.length){
         this.bosses[0].nbrVictoire++;
-        this.bosses[0].pv = 1;
+        this.bosses[0].pv = 100;
         this.bossService.updateBoss(this.bosses[0]).then( res =>
           this.checkIfOpponents()
         );
@@ -119,13 +119,11 @@ export class BattleComponent implements OnInit {
   checkIfOpponents(): void {
     if (this.hero && this.hero.pv){
       if (this.hero.pv <= 0){
-        this.transfertService.setData('defeat');
-        this.router.navigate(['/victory-defeat-screen']);
+        this.finishScreen('defeat', this.hero.id);
       }else{
         this.bosses.splice(0, 1);
         if (this.bosses.length === 0){
-          this.transfertService.setData('victory');
-          this.router.navigate(['/victory-defeat-screen']);
+          this.finishScreen('victory', this.hero.id);
         }else{
           this.newGame();
         }
@@ -158,6 +156,13 @@ export class BattleComponent implements OnInit {
 
 
   // DATA
+  finishScreen(typeInfo: string, idHero?: string): void {
+    this.transfertService.setData({
+      typeInfo,
+      idHero
+    });
+    this.router.navigate(['/victory-defeat-screen']);
+  }
 
   getHero(): void {
     const idString = this.route.snapshot.paramMap.get('id');

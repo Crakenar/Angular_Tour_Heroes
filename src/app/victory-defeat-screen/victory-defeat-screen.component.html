@@ -1,1 +1,27 @@
-<p>victory-defeat-screen works!</p>
+{{data.infoDF}}
+<div class="row" *ngIf="data; else noData">
+  <div class="col-lg-6" *ngIf="data.typeInfo === 'victory' else defeat">
+    <button class="btn btn-success">
+        VICTOIRE
+    </button>
+    <button class="btn btn-success" routerLink="/battle/{{data.idHero}}">
+      RETRY
+    </button>
+  </div>
+</div>
+
+<ng-template #defeat>
+  <button class="btn btn-danger">
+    DEFAITE
+  </button>
+  <button class="btn btn-success" routerLink="/battle/{{data.idHero}}">
+    RETRY
+  </button>
+  <button class="btn btn-success" routerLink="/hereos">
+    Retour Choix Hero
+  </button>
+</ng-template>
+
+<ng-template #noData>
+  Il n'y a rien ici pour vous espece de tricheur
+</ng-template>

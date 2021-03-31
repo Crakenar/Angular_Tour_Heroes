@@ -24,7 +24,7 @@
     </h2>
     <!--TIC TAC TOE-->
     <main>
-      <app-carre *ngFor="let val of squares; let i = index" (click)="makeMove(i)"> </app-carre>
+      <app-carre *ngFor="let val of squares; let i = index" [value]="val" (click)="makeMove(i)"> </app-carre>
     </main>
   </div>
   <div class="col-lg-2">

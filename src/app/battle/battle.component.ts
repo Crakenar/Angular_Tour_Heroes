@@ -18,7 +18,7 @@ export class BattleComponent implements OnInit {
   boss?: Boss;
   squares?: string[];
   xIsNext?: boolean;
-  winner?: string;
+  winner: string | null | undefined;
   pvBossBase?: number;
 
   constructor(private route: ActivatedRoute,
@@ -35,12 +35,9 @@ export class BattleComponent implements OnInit {
   // Winner = X => Hero attaque boss
   attaque(): void {
     if (this.winner === 'X'){
-      if (this.hero !== null){
-        // @ts-ignore
+      if (this.hero && this.hero.attaque && this.hero.degats){
         const attaqueDmg = (-this.hero.attaque) + (-this.hero.degats);
-        // @ts-ignore
-        if (this.bosses.length){
-          // @ts-ignore
+        if (this.bosses.length && this.bosses[0].pv){
           this.bosses[0].pv = this.bosses[0].pv + attaqueDmg;
         }
       }
@@ -59,22 +56,19 @@ export class BattleComponent implements OnInit {
   }
 
   makeMove(idx: number): void {
-    // @ts-ignore
-    if (!this.squares[idx]) {
-      // @ts-ignore
-      this.squares.splice(idx, 1, this.player);
-      this.xIsNext = !this.xIsNext;
+    if (this.squares){
+      if (!this.squares[idx]) {
+        this.squares.splice(idx, 1, this.player);
+        this.xIsNext = !this.xIsNext;
+      }
     }
-    // @ts-ignore
     this.winner = this.calculateWinner();
     this.attaque();
     if (this.isBossDead()) {
       if (this.bosses.length){
         this.bosses[0].vaincu++;
         this.bosses[0].pv = 1;
-        this.bossService.updateBoss(this.bosses[0]).then(
-          // @ts-ignore
-          this.bosses.splice(0, 1),
+        this.bossService.updateBoss(this.bosses[0]).then( res =>
           this.checkIfOpponents()
         );
       }
@@ -84,18 +78,20 @@ export class BattleComponent implements OnInit {
 
   // Condition on this.bosses Array
   isBossDead(): boolean{
-    // @ts-ignore
-    return this.bosses[0].pv <= 0;
+    if (this.bosses[0].pv){
+      return this.bosses[0].pv <= 0;
+    }else{
+      return false;
+    }
   }
   checkIfOpponents(): void {
-    // @ts-ignore
+    this.bosses.splice(0, 1);
     if (this.bosses.length === 0){
       this.router.navigate(['/']);
     }
   }
 
-  // tslint:disable-next-line:typedef
-  calculateWinner() {
+  calculateWinner(): string | null {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
@@ -109,10 +105,10 @@ export class BattleComponent implements OnInit {
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
-      // @ts-ignore
-      if (this.squares[a] && this.squares[a] === this.squares[b] && this.squares[a] === this.squares[c]) {
-        // @ts-ignore
-        return this.squares[a];
+      if (this.squares){
+        if (this.squares[a] && this.squares[a] === this.squares[b] && this.squares[a] === this.squares[c]) {
+          return this.squares[a];
+        }
       }
     }
     return null;

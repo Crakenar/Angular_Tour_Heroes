@@ -1,9 +1,9 @@
 import {Component, OnInit, Input, SimpleChange, OnChanges, SimpleChanges} from '@angular/core';
-import {HeroService } from '../Services/hero.service';
-import { Hero } from '../data/hero';
-import {WeaponsService} from '../Services/weapons.service';
+import {HeroService } from '../../Services/hero.service';
+import { Hero } from '../../data/hero';
+import {WeaponsService} from '../../Services/weapons.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Weapon} from '../data/weapon';
+import {Weapon} from '../../data/weapon';
 
 @Component({
   selector: 'app-add-hero',

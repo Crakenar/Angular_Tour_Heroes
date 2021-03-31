@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeroesComponent } from './heroes/heroes.component';
+import { HeroesComponent } from './crud-hero/heroes/heroes.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import { HeroDetailComponent } from './hero-detail/hero-detail.component';
-import { WeaponComponent} from './weapon/weapon.component';
-import {DetailWeaponComponent} from './detail-weapon/detail-weapon.component';
-import {AddHeroComponent} from './add-hero/add-hero.component';
-import {BattleComponent} from './battle/battle.component';
-import {AddWeaponComponent} from './add-weapon/add-weapon.component';
-import {VictoryDefeatScreenComponent} from './victory-defeat-screen/victory-defeat-screen.component';
+import { HeroDetailComponent } from './crud-hero/hero-detail/hero-detail.component';
+import { WeaponComponent} from './crud-weapon/weapon/weapon.component';
+import {DetailWeaponComponent} from './crud-weapon/detail-weapon/detail-weapon.component';
+import {AddHeroComponent} from './crud-hero/add-hero/add-hero.component';
+import {BattleComponent} from './first-game/battle/battle.component';
+import {AddWeaponComponent} from './crud-weapon/add-weapon/add-weapon.component';
+import {VictoryDefeatScreenComponent} from './first-game/victory-defeat-screen/victory-defeat-screen.component';
 import {GamesSelectComponent} from './games-select/games-select.component';
-import {MiniZeldaGameComponent} from './mini-zelda-game/mini-zelda-game.component';
+import {MiniZeldaGameComponent} from './second-game/mini-zelda-game/mini-zelda-game.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },

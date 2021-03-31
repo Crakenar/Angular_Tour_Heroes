@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, SimpleChange, OnChanges, SimpleChanges} from '@angular/core';
-import {WeaponsService} from '../Services/weapons.service';
-import { Weapon } from '../data/weapon';
+import {WeaponsService} from '../../Services/weapons.service';
+import { Weapon } from '../../data/weapon';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Location} from '@angular/common';
 

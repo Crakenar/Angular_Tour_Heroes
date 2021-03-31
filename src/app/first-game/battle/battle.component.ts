@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HeroService} from '../Services/hero.service';
-import {Boss} from '../data/Boss';
-import {Hero} from '../data/hero';
-import {BossService} from '../Services/boss.service';
-import { SendDataThroughComponentsService } from '../Services/send-data-through-components.service';
+import {HeroService} from '../../Services/hero.service';
+import {Boss} from '../../data/Boss';
+import {Hero} from '../../data/hero';
+import {BossService} from '../../Services/boss.service';
+import { SendDataThroughComponentsService } from '../../Services/send-data-through-components.service';
 import {error} from '@angular/compiler/src/util';
 import {first} from 'rxjs/operators';
 

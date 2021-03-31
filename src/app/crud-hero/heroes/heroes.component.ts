@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Hero} from '../data/hero';
-import {HeroService} from '../Services/hero.service';
-import {MessageService} from '../Services/messages.service';
+import {Hero} from '../../data/hero';
+import {HeroService} from '../../Services/hero.service';
+import {MessageService} from '../../Services/messages.service';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
-import {SendDataThroughComponentsService} from '../Services/send-data-through-components.service';
+import {SendDataThroughComponentsService} from '../../Services/send-data-through-components.service';
 
 @Component({
   selector: 'app-heroes',

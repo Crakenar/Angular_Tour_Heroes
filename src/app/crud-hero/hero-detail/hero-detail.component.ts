@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Hero} from '../data/hero';
+import {Hero} from '../../data/hero';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import {HeroService} from '../Services/hero.service';
-import {WeaponsService} from '../Services/weapons.service';
+import {HeroService} from '../../Services/hero.service';
+import {WeaponsService} from '../../Services/weapons.service';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {Weapon} from '../data/weapon';
+import {Weapon} from '../../data/weapon';
 
 @Component({
   selector: 'app-hero-detail',

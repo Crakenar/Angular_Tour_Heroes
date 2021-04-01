@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MiniZeldaGameComponent} from './mini-zelda-game/mini-zelda-game.component';
-import {RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
+
+import { MiniZeldaGameComponent } from './mini-zelda-game/mini-zelda-game.component';
 
 
 

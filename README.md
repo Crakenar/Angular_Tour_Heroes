@@ -19,13 +19,18 @@ Or You can clone the project using ssh with `git clone "git@github.com:Crakenar/
 
 1 - Classic 
 
-In a terminal you can run `ng serve --open`. Navigate to `http://localhost:4200/`. 
-    The app will automatically reload if you change any of the source files. 
+In a terminal you can run `ng serve --open`.
+    
+Navigate to `http://localhost:4200/`. 
+
+The app will automatically reload if you change any of the source files. 
     
 2 - Docker
 
 In a terminal `sudo docker build -t angular-tourofheroes-image`.
+
 Then `sudo docker run -p 81:80 angular-tourofheroes-image`.
+
 Naviguate to `http://localhost:81`.
 
 ## Code Editing

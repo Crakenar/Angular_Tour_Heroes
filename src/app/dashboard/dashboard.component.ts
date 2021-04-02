@@ -5,6 +5,8 @@ import {MessageService} from '../Services/messages.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
 import {filter, max} from 'rxjs/operators';
+import {InternalServerComponent} from '../error-pages/internal-server/internal-server.component';
+import {ErrorHandlerService} from '../Services/error-handler.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,32 +18,41 @@ export class DashboardComponent implements OnInit {
   itemFireBase?: Observable<any[]>;
   heroes: Hero[] = [];
   heroMostUsed?: any;
-  getHeroes(): void {
-    // take(5)
-    this.heroService.getHeroes().subscribe(heroes =>
-      // do stuff using data
-      this.heroes = heroes.sort((a: Hero, b: Hero) => b.usage - a.usage).splice(0, 5)
-    );
-    this.heroService.getHeroes().subscribe(heroes =>
-      // do stuff using data
-      // tslint:disable-next-line:no-shadowed-variable
-      this.heroMostUsed = heroes.sort((a: Hero, b: Hero) => b.usage - a.usage).splice(0, 1)
-    );
-  }
+  errorMessage = '';
 
-/*  getHeroMaxUse(): void {
-    // @ts-ignore
-    this.heroService.getHeroes().pipe(max<Hero>((a: Hero, b: Hero) => a.usage < b.usage ? -1 : 1))
-      .subscribe(hereos => this.heroMostUsed = hereos);
-    // console.log('most used : ' + this.heroMostUsed);
-  }*/
-
-  constructor(private messageService: MessageService, private heroService: HeroService) { }
+  constructor(
+    private messageService: MessageService,
+    private heroService: HeroService,
+    private errorService: ErrorHandlerService
+  ) { }
 
   ngOnInit(): void {
     this.getHeroes();
     this.getHeroMaxUse();
     // this.getHeroMaxUse();
+  }
+
+
+  getHeroes(): void {
+    // take(5)
+    this.heroService.getHeroes().subscribe(heroes => {
+        this.heroes = heroes.sort((a: Hero, b: Hero) => b.usage - a.usage).splice(0, 5);
+    },
+    (error) => {
+      this.errorService.handleError(error);
+      this.errorMessage = this.errorService.errorMessage;
+    }
+      );
+    this.heroService.getHeroes().subscribe(heroes => {
+      // do stuff using data
+      // tslint:disable-next-line:no-shadowed-variable
+      this.heroMostUsed = heroes.sort((a: Hero, b: Hero) => b.usage - a.usage).splice(0, 1);
+      },
+      (error) => {
+        this.errorService.handleError(error);
+        this.errorMessage = this.errorService.errorMessage;
+      }
+      );
   }
 
   getHeroMaxUse(): void {

@@ -14,10 +14,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AngularFireModule } from '@angular/fire';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { FirstGameModule } from './first-game/first-game.module';
-import { SecondGameModule } from './second-game/second-game.module';
-import { CrudHeroModule } from './crud-hero/crud-hero.module';
-import { CrudWeaponModule } from './crud-weapon/crud-weapon.module';
 
 @NgModule({
   declarations: [
@@ -29,11 +25,6 @@ import { CrudWeaponModule } from './crud-weapon/crud-weapon.module';
     FilterPipePipe,
   ],
   imports: [
-    FirstGameModule,
-    SecondGameModule,
-    CrudHeroModule,
-    CrudWeaponModule,
-
     BrowserModule,
     AppRoutingModule,
     AngularFireModule,

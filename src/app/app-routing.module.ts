@@ -11,26 +11,31 @@ import {AddWeaponComponent} from './crud-weapon/add-weapon/add-weapon.component'
 import {VictoryDefeatScreenComponent} from './first-game/victory-defeat-screen/victory-defeat-screen.component';
 import {GamesSelectComponent} from './games-select/games-select.component';
 import {MiniZeldaGameComponent} from './second-game/mini-zelda-game/mini-zelda-game.component';
+import {InternalServerComponent} from './error-pages/internal-server/internal-server.component';
+import {NotFound404Component} from './error-pages/not-found404/not-found404.component';
 
 
 
 // Il faut fair du lazy load avec Children:
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'heroes', component: HeroesComponent },
-  { path: 'weapons', component: WeaponComponent },
-  { path: 'details/:id', component: HeroDetailComponent },
-  { path: 'details/:id/update', component: HeroDetailComponent },
-  { path: 'detailsWeapon/:id', component: DetailWeaponComponent },
-  { path: 'detailsWeapon/:id/update', component: DetailWeaponComponent },
-  { path: 'addHero', component: AddHeroComponent },
-  { path: 'addWeapon', component: AddWeaponComponent },
-  { path: 'battle/:id', component: BattleComponent },
-  { path: 'victory-defeat-screen', component: VictoryDefeatScreenComponent },
+  // LAZY LOAD MODULES
+  { path: 'heroes', loadChildren: () => import('./crud-hero/crud-hero.module')
+      .then(m => m.CrudHeroModule) },
+  { path: 'weapons', loadChildren: () => import('./crud-weapon/crud-weapon.module')
+      .then(m => m.CrudWeaponModule) },
+  { path: 'battle/:id', loadChildren: () => import('./first-game/first-game.module')
+      .then(m => m.FirstGameModule)},
+  { path: 'zelda-game', loadChildren: () => import('./second-game/second-game.module')
+      .then(m => m.SecondGameModule)},
+
   { path: 'game-select', component: GamesSelectComponent },
-  { path: 'zelda-game', component: MiniZeldaGameComponent },
-  { path: '**', component: DashboardComponent}
+  { path: 'error-pages', loadChildren: () => import ('./error-pages/error-pages.module')
+      .then(m => m.ErrorPagesModule)},
+  { path: '500', component: InternalServerComponent },
+  { path: '404', component: NotFound404Component },
+  { path: '**', redirectTo: '404', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -163,7 +163,7 @@ export class BattleComponent implements OnInit {
       typeInfo,
       idHero
     });
-    this.router.navigate(['/victory-defeat-screen']);
+    this.router.navigate(['battle/' + idHero + '/victory-defeat-screen']);
   }
 
   getHero(): void {

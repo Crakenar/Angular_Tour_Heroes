@@ -21,11 +21,11 @@
     <th>{{weapon.attaque}}</th>
     <th>{{weapon.esquive}}</th>
     <th>{{weapon.degats}}</th>
-    <th> <a routerLink="/detailsWeapon/{{weapon.id}}">
+    <th> <a routerLink="/weapons/detailsWeapon/{{weapon.id}}">
       <span  class="badge">{{weapon.id}}</span>
     </a></th>
     <th>
-      <button routerLink="/detailsWeapon/{{weapon.id}}/update">Update</button>
+      <button routerLink="/weapons/detailsWeapon/{{weapon.id}}/update">Update</button>
     </th>
     <th>
       <button (click)="delete(weapon.id)">Delete</button>
@@ -33,4 +33,4 @@
   </tr>
   </tbody>
 </table>
-<a routerLink="/addWeapon">Ajouter une arme</a>
+<a routerLink="/weapons/addWeapon">Ajouter une arme</a>

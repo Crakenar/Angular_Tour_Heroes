@@ -6,6 +6,7 @@ import {WeaponComponent} from './weapon/weapon.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {WeaponRoutingModule} from './weapon-routing.module';
 
 
 
@@ -25,7 +26,8 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    WeaponRoutingModule
   ],
 })
 export class CrudWeaponModule { }

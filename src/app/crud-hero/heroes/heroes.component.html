@@ -21,20 +21,20 @@
           <th>{{hero.pv}}</th>
           <th>{{hero.attaque}}</th>
           <th>{{hero.esquive}}</th>
-          <th> <a routerLink="/details/{{hero.id}}">
+          <th> <a routerLink="/heroes/details/{{hero.id}}">
             <span  class="badge">{{hero.id}}</span>
           </a></th>
           <th>
             <button (click)="delete(hero.id)">Delete</button>
           </th>
           <th>
-            <button routerLink="/details/{{hero.id}}/update">Update</button>
+            <button routerLink="/heroes/details/{{hero.id}}/update">Update</button>
           </th>
           <th><button (click)="addUsageHero(hero.id)">Uiliser {{hero.name}}</button> </th>
         </tr>
       </tbody>
     </table>
-<a routerLink="/addHero">Ajouter un Hero</a>
+<a routerLink="/heroes/addHero">Ajouter un Hero</a>
 
 
 <!--<div>-->

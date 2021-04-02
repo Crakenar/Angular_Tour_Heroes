@@ -6,6 +6,7 @@ import {HeroDetailComponent} from './hero-detail/hero-detail.component';
 import {HeroesComponent} from './heroes/heroes.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import {HeroRoutingModule} from './hero-routing.module';
 
 
 
@@ -25,7 +26,8 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    HeroRoutingModule
   ]
 })
 export class CrudHeroModule { }

@@ -7,6 +7,8 @@ import {Observable} from 'rxjs';
 import {filter, max} from 'rxjs/operators';
 import {InternalServerComponent} from '../error-pages/internal-server/internal-server.component';
 import {ErrorHandlerService} from '../Services/error-handler.service';
+import {Router} from '@angular/router';
+import {SendDataThroughComponentsService} from '../Services/send-data-through-components.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,12 +18,13 @@ import {ErrorHandlerService} from '../Services/error-handler.service';
 export class DashboardComponent implements OnInit {
 
   itemFireBase?: Observable<any[]>;
-  heroes: Hero[] = [];
+  heroes?: Hero[] = [];
   heroMostUsed?: any;
   errorMessage = '';
 
   constructor(
-    private messageService: MessageService,
+    private router: Router,
+    private transfertService: SendDataThroughComponentsService,
     private heroService: HeroService,
     private errorService: ErrorHandlerService
   ) { }
@@ -29,7 +32,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getHeroes();
     this.getHeroMaxUse();
-    // this.getHeroMaxUse();
   }
 
 
@@ -44,7 +46,6 @@ export class DashboardComponent implements OnInit {
     }
       );
     this.heroService.getHeroes().subscribe(heroes => {
-      // do stuff using data
       // tslint:disable-next-line:no-shadowed-variable
       this.heroMostUsed = heroes.sort((a: Hero, b: Hero) => b.usage - a.usage).splice(0, 1);
       },
@@ -56,12 +57,28 @@ export class DashboardComponent implements OnInit {
   }
 
   getHeroMaxUse(): void {
-    // tslint:disable-next-line:no-shadowed-variable
-    const maxUsage = this.heroes.reduce((max: number, hero: Hero) => (hero.usage > max ? hero.usage : max), 1);
-    this.heroMostUsed = this.heroes.find(o => {
-      return o.usage === maxUsage;
-    });
-    // console.log('after content' + this.heroes);
+    if (this.heroes) {
+      // tslint:disable-next-line:no-shadowed-variable
+      const maxUsage = this.heroes.reduce((max: number, hero: Hero) => (hero.usage > max ? hero.usage : max), 1);
+      this.heroMostUsed = this.heroes.find(o => {
+        return o.usage === maxUsage;
+      });
+    }
+  }
+
+  addUsageHero(id?: string): void{
+    if (this.heroes){
+      this.heroes.forEach( value => {
+        if (value.id === id){
+          value.usage++;
+          this.heroService.updateHero(value);
+        }
+      });
+      this.router.navigate(['game-select']);
+      this.transfertService.setData({
+        idHero : id
+      });
+    }
   }
 
 }

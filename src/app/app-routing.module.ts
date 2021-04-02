@@ -14,9 +14,6 @@ import {MiniZeldaGameComponent} from './second-game/mini-zelda-game/mini-zelda-g
 import {InternalServerComponent} from './error-pages/internal-server/internal-server.component';
 import {NotFound404Component} from './error-pages/not-found404/not-found404.component';
 
-
-
-// Il faut fair du lazy load avec Children:
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
@@ -29,11 +26,10 @@ const routes: Routes = [
       .then(m => m.FirstGameModule)},
   { path: 'zelda-game', loadChildren: () => import('./second-game/second-game.module')
       .then(m => m.SecondGameModule)},
-
-  { path: 'game-select', component: GamesSelectComponent },
   { path: 'error-pages', loadChildren: () => import ('./error-pages/error-pages.module')
       .then(m => m.ErrorPagesModule)},
-  { path: '500', component: InternalServerComponent },
+
+  { path: 'game-select', component: GamesSelectComponent },
   { path: '404', component: NotFound404Component },
   { path: '**', redirectTo: '404', pathMatch: 'full' }
 ];

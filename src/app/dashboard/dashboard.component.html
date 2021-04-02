@@ -1,22 +1,31 @@
-<h2>Top Heroes</h2>
-<div class="heroes-menu">
-  <a *ngFor="let hero of heroes"
-     routerLink="/details/{{hero.id}}"
-  >
-    {{hero.name}}
-  </a>
-  <!--<li *ngFor="let heroesFirestorm of itemFireBase | async">
-    <a routerLink="/details/{{heroesFirestorm.id}}">
-      <span  class="badge">{{heroesFirestorm.id}}</span>  {{heroesFirestorm.name}}
-    </a>
-  </li>-->
-</div>
-
-<h2>Le hero le plus joue</h2>
-<div class="" *ngIf="heroMostUsed">
-  <div *ngFor="let theHero of heroMostUsed">
-    {{theHero.name}}
+<!--ON PEUT FAIRE MIEUX AVEC UN TEMPLATE QUI PREND UN ARRAY EN PARAM MAIS DESIGN SAME DONC NON-->
+<div class="row" style="margin-right: 6px; margin-top: 25px">
+  <div class="col-lg-4" *ngIf="heroes">
+    <h2 style="margin-bottom: 25px">Les Heros les plus joues</h2>
+    <div class="card" style="width: 18rem;" *ngFor="let hero of heroes">
+      <div class="card-body">
+        <h5 class="card-title">
+          <button (click)="addUsageHero(hero?.id)">{{hero?.name}}</button>
+        </h5>
+      </div>
+    </div>
   </div>
-
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4" *ngIf="heroMostUsed">
+    <h2>Le hero le plus joue</h2>
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="assets/top1.jpeg" height="250" width="" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{heroMostUsed[0]?.name}}</h5>
+        <ul class="list-group">
+          <li class="list-group-item">Attaque : {{heroMostUsed[0]?.attaque}}</li>
+          <li class="list-group-item">PV : {{heroMostUsed[0]?.pv}}</li>
+          <li class="list-group-item">Esquive : {{heroMostUsed[0]?.esquive}}</li>
+          <li class="list-group-item">Nombre de Victoire : {{heroMostUsed[0]?.nbrVictoire == null ? '0' : heroMostUsed[0]?.nbrVictoire}}</li>
+          <li class="list-group-item">Nombre de Defaite : {{heroMostUsed[0]?.vaincu == null ? '0' : heroMostUsed[0]?.vaincu}}</li>
+        </ul>
+        <button (click)="addUsageHero(heroMostUsed[0]?.id)">Uiliser {{heroMostUsed[0]?.name}}</button>
+      </div>
+    </div>
+  </div>
 </div>
-<!--<app-hero-detail [hero]="selectedHero"></app-hero-detail>-->

@@ -16,7 +16,7 @@ import {NotFound404Component} from './error-pages/not-found404/not-found404.comp
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
+
   // LAZY LOAD MODULES
   { path: 'heroes', loadChildren: () => import('./crud-hero/crud-hero.module')
       .then(m => m.CrudHeroModule) },
@@ -29,6 +29,7 @@ const routes: Routes = [
   { path: 'error-pages', loadChildren: () => import ('./error-pages/error-pages.module')
       .then(m => m.ErrorPagesModule)},
 
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'game-select', component: GamesSelectComponent },
   { path: '404', component: NotFound404Component },
   { path: '**', redirectTo: '404', pathMatch: 'full' }

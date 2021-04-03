@@ -4,7 +4,8 @@ section {
   border: 2px solid black;
 }
 
+canvas { border-style: solid }
 
 .dot {
-  
+
 }

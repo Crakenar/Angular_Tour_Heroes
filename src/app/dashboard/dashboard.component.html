@@ -1,7 +1,7 @@
 <!--ON PEUT FAIRE MIEUX AVEC UN TEMPLATE QUI PREND UN ARRAY EN PARAM MAIS DESIGN SAME DONC NON-->
 <div class="row" style="margin-right: 6px; margin-top: 25px">
   <div class="col-lg-4" *ngIf="heroes">
-    <h2 style="margin-bottom: 25px">Les Heros les plus joues</h2>
+    <h2 style="margin-bottom: 25px">Les {{heroes.length != 5 ? heroes.length : '5'}} Heros les plus joues</h2>
     <div class="card" style="width: 18rem;" *ngFor="let hero of heroes">
       <div class="card-body">
         <h5 class="card-title">

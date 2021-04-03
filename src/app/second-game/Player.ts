@@ -7,6 +7,30 @@ export class Player {
   constructor(private ctx: CanvasRenderingContext2D) {
   }
 
+  getX(): number {
+    return this.x;
+  }
+
+  getY(): number {
+    return this.y;
+  }
+
+  getZ(): number {
+    return this.z;
+  }
+
+  setX(positionX: number): void {
+    this.x = positionX;
+  }
+
+  setY(positionY: number): void {
+    this.y = positionY;
+  }
+
+  setZ(positionZ: number): void {
+    this.z = positionZ;
+  }
+
   moveRight(): void{
     this.x++;
     this.draw();

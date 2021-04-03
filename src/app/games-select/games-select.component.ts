@@ -9,10 +9,13 @@ import {SendDataThroughComponentsService} from '../Services/send-data-through-co
 export class GamesSelectComponent implements OnInit {
 
   data: any;
+  heroId?: string;
   constructor(private transfertService: SendDataThroughComponentsService) { }
 
   ngOnInit(): void {
     this.data = this.transfertService.getData();
+    this.transfertService.setData(this.data);
+    this.heroId = this.data.heroId;
     console.log(this.data);
   }
 

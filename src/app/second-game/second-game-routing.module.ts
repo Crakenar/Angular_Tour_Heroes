@@ -6,7 +6,7 @@ import {VictoryDefeatScreenComponent} from '../first-game/victory-defeat-screen/
 
 
 const routes: Routes = [
-  { path: '', component:  MiniZeldaGameComponent},
+  { path: ':id', component:  MiniZeldaGameComponent},
   { path: 'victory-defeat-screen', component:  VictoryDefeatScreenComponent},
 ];
 

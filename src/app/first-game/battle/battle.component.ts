@@ -7,6 +7,8 @@ import {BossService} from '../../Services/boss.service';
 import { SendDataThroughComponentsService } from '../../Services/send-data-through-components.service';
 import {error} from '@angular/compiler/src/util';
 import {first} from 'rxjs/operators';
+import {Weapon} from '../../data/weapon';
+import {WeaponsService} from '../../Services/weapons.service';
 
 @Component({
   selector: 'app-battle',
@@ -19,8 +21,9 @@ export class BattleComponent implements OnInit {
   hero: Hero = {} as Hero;
   bosses: Boss[] = [];
   boss?: Boss;
+  weapon?: Weapon;
   squares?: string[];
-  xIsNext?: boolean;
+  heroIsNext?: boolean;
   winner: string | null | undefined;
   pvBossBase?: number;
 
@@ -28,6 +31,7 @@ export class BattleComponent implements OnInit {
               private router: Router,
               private heroService: HeroService,
               private bossService: BossService,
+              private weaponService: WeaponsService,
               private transfertService: SendDataThroughComponentsService
               ) {
   }
@@ -64,18 +68,34 @@ export class BattleComponent implements OnInit {
   newGame(): void {
     this.squares = Array(9).fill(null);
     this.winner = '';
-    this.xIsNext = true;
+    this.heroIsNext = true;
   }
 
   get player(): string {
-    return this.xIsNext ? 'X' : 'O';
+    // X = hero
+    return this.heroIsNext ? 'X' : 'O';
   }
-
+  // besoin de cliquer pour enclencher le move de l'ordi
   makeMove(idx: number): void {
     if (this.squares){
       if (!this.squares[idx]) {
-        this.squares.splice(idx, 1, this.player);
-        this.xIsNext = !this.xIsNext;
+        // si c'est a l'ordinateur de jouer
+        if (!this.heroIsNext){
+          // il choisit un nombre random entre 0 et 8 (grille du tic tac toe)
+          let rand = Math.floor(Math.random() * this.squares.length);
+          // tant que le carre correspondant au rand n'est pas vide
+          // donc qui n'a pas ete joue
+          // alors on rejoue un rand
+          // sinon on remplit le carre
+          while (this.squares[rand] !== null) {
+            rand = Math.floor(Math.random() * this.squares.length);
+          }
+          this.squares.splice(rand, 1, this.player);
+        }else {
+          this.squares.splice(idx, 1, this.player);
+        }
+        console.log('squares after splice : ' + this.squares);
+        this.heroIsNext = !this.heroIsNext;
       }
     }
     this.winner = this.calculateWinner();
@@ -171,7 +191,10 @@ export class BattleComponent implements OnInit {
     if (idString) {
       const idInt = +idString;
       this.heroService.getHero(idString)
-        .subscribe(hero => this.hero = hero);
+        .subscribe(hero => {
+          this.hero = hero;
+          this.getWeapon();
+        });
     }
   }
 
@@ -181,6 +204,10 @@ export class BattleComponent implements OnInit {
     // setTimeout(() => {x.unsubscribe(); } , 1000 );
     // Marche avec Promise<Boss> pour getBosses()
     this.bossService.getBosses().pipe(first()).subscribe(bosses => this.bosses = bosses);
+  }
+
+  getWeapon(): void {
+    this.weaponService.getWeapon(this.hero.id_weapon).subscribe(weapon => this.weapon = weapon);
   }
 
 }

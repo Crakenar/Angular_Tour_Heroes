@@ -123,9 +123,9 @@ export class MiniZeldaGameComponent implements OnInit {
   Play(): void {
     // console.log('play' + this.ctx);
     if (this.ctx){
-      const player = new Player(this.ctx);
+      const player = new Player(this.ctx, 'green');
       this.player = player;
-      const boss = new Player(this.ctx);
+      const boss = new Player(this.ctx, 'red');
       this.boss = boss;
      // this.players = this.players.concat(player);
     }
@@ -148,6 +148,22 @@ export class MiniZeldaGameComponent implements OnInit {
       if (this.player?.getY() * this.player?.getZ() < 0) {
         this.player.setY(this.ctx.canvas.height / this.player.getZ() - 1);
       }
+
+
+
+
+      if (this.boss?.getX() * this.boss?.getZ() > this.ctx?.canvas.width) {
+        this.boss.setX(0);
+      }
+      if (this.boss?.getX() * this.boss?.getZ() < 0){
+        this.boss.setX(this.ctx.canvas.width / this.boss.getZ() - 1 );
+      }
+      if (this.boss?.getY() * this.boss?.getZ() > this.ctx.canvas.height) {
+        this.boss.setY(0);
+      }
+      if (this.boss?.getY() * this.boss?.getZ() < 0) {
+        this.boss.setY(this.ctx.canvas.height / this.boss.getZ() - 1);
+      }
     }
   }
 
@@ -158,22 +174,22 @@ export class MiniZeldaGameComponent implements OnInit {
         case 'KeyD':
         case 'ArrowRight':
           this.player?.moveRight();
-          this.boss?.moveRight();
+          this.boss?.randomMove();
           break;
         case 'KeyA':
         case 'ArrowLeft':
           this.player?.moveLeft();
-          this.boss?.moveRight();
+          this.boss?.randomMove();
           break;
         case 'KeyW':
         case 'ArrowUp':
           this.player?.moveUp();
-          this.boss?.moveRight();
+          this.boss?.randomMove();
           break;
         case 'KeyS':
         case 'ArrowDown':
           this.player?.moveDown();
-          this.boss?.moveRight();
+          this.boss?.randomMove();
           break;
         case 'Space':
           break;
@@ -182,7 +198,10 @@ export class MiniZeldaGameComponent implements OnInit {
 
   public getHero(idHero: string): void {
   // this.heroService.getHero(idHero).pipe(finalize(() => this.getWeapon())).subscribe(hero => this.hero = hero);
-     this.heroService.getHero(idHero).subscribe(hero => {this.hero = hero; this.getWeapon(); } );
+     this.heroService.getHero(idHero).subscribe(hero => {
+       this.hero = hero;
+       this.getWeapon();
+     });
     // this.heroService.getHero(idHero).subscribe(
     //   hero => this.hero = hero,
     //   error => console.log(error),

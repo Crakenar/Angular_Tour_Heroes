@@ -1,10 +1,11 @@
 export class Player {
-  private color = 'red';
+  private color;
   private x = 0;
   private y = 0;
   private z = 30; // pour le css z-index
 
-  constructor(private ctx: CanvasRenderingContext2D) {
+  constructor(private ctx: CanvasRenderingContext2D, private colorC: string) {
+    this.color = colorC;
   }
 
   getX(): number {
@@ -49,6 +50,24 @@ export class Player {
   moveDown(): void {
     this.y++;
     this.draw();
+  }
+
+  randomMove(): void {
+    const rand = Math.floor(Math.random() * 4);
+    switch (rand){
+      case 0:
+        this.moveRight();
+        break;
+      case 1:
+        this.moveLeft();
+        break;
+      case 2:
+        this.moveDown();
+        break;
+      case 3:
+        this.moveUp();
+        break;
+    }
   }
 
   draw(): void {

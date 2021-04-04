@@ -4,9 +4,11 @@ import {HeroService} from '../../Services/hero.service';
 import {Hero} from '../../data/hero';
 import {Boss} from '../../data/Boss';
 import {BossService} from '../../Services/boss.service';
-import {first} from 'rxjs/operators';
+import {finalize, first} from 'rxjs/operators';
 import {SendDataThroughComponentsService} from '../../Services/send-data-through-components.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {WeaponsService} from '../../Services/weapons.service';
+import {Weapon} from '../../data/weapon';
 
 @Component({
   selector: 'app-mini-zelda-game',
@@ -23,8 +25,7 @@ import {ActivatedRoute, Router} from '@angular/router';
                 <li class="list-group-item">Attaque : {{hero.attaque}}</li>
                 <li class="list-group-item">PV : {{hero.pv}}</li>
                 <li class="list-group-item">Esquive : {{hero.esquive}}</li>
-                <li class="list-group-item">Arme : {{hero.id_weapon}}</li>
-                <li class="list-group-item">Point restants : {{hero.points}}</li>
+                <li class="list-group-item" *ngIf="weapon">Arme : {{weapon.name}}</li>
               </ul>
             </div>
           </div>
@@ -33,7 +34,7 @@ import {ActivatedRoute, Router} from '@angular/router';
       <div class="col-lg-8">
         <button style="margin-left: 45%" nbButton outline status="danger" (click)="Play()">Play</button>
         <!--GAME-->
-        <canvas #canvas width="1000" height="800"></canvas>
+        <canvas style="margin-left: 5%" #canvas width="1000" height="800"></canvas>
       </div>
       <div class="col-lg-2">
         <!--COTE BOSS-->
@@ -73,20 +74,28 @@ export class MiniZeldaGameComponent implements OnInit {
 
   private static FPS = 60;
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement> | undefined;
+
+  // Variable html
+  hero?: Hero;
+  bosses: Boss[] = [];
+  data: any;
+  heroId?: string | null;
+  weapon?: Weapon;
+
+  // Variable Game CANVAS
+  player?: Player;
+  players: Player[] = [];
+  boss?: Player;
   ctx?: CanvasRenderingContext2D | null;
   requestId: any;
   interval: any;
-  hero?: Hero;
-  bosses: Boss[] = [];
-  player?: Player;
-  players: Player[] = [];
-  data: any;
-  heroId?: string | null;
+
   constructor(
     private ngZone: NgZone,
     private route: ActivatedRoute,
     private heroService: HeroService,
     private bossService: BossService,
+    private weaponService: WeaponsService,
     private transfertService: SendDataThroughComponentsService,
   ) { }
 
@@ -97,6 +106,7 @@ export class MiniZeldaGameComponent implements OnInit {
     this.getBosses();
     if (this.heroId) {
       this.getHero(this.heroId);
+      this.getWeapon();
     }
     if (this.canvas){
       this.ctx = this.canvas.nativeElement.getContext('2d');
@@ -115,14 +125,17 @@ export class MiniZeldaGameComponent implements OnInit {
     if (this.ctx){
       const player = new Player(this.ctx);
       this.player = player;
+      const boss = new Player(this.ctx);
+      this.boss = boss;
      // this.players = this.players.concat(player);
     }
   }
 
   private tick(): void {
-    if (this.ctx && this.player) {
+    if (this.ctx && this.player && this.boss) {
       this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
       this.player?.draw();
+      this.boss.draw();
       if (this.player?.getX() * this.player?.getZ() > this.ctx?.canvas.width) {
         this.player.setX(0);
       }
@@ -145,19 +158,22 @@ export class MiniZeldaGameComponent implements OnInit {
         case 'KeyD':
         case 'ArrowRight':
           this.player?.moveRight();
+          this.boss?.moveRight();
           break;
         case 'KeyA':
         case 'ArrowLeft':
           this.player?.moveLeft();
+          this.boss?.moveRight();
           break;
         case 'KeyW':
         case 'ArrowUp':
           this.player?.moveUp();
-          console.log('move up');
+          this.boss?.moveRight();
           break;
         case 'KeyS':
         case 'ArrowDown':
           this.player?.moveDown();
+          this.boss?.moveRight();
           break;
         case 'Space':
           break;
@@ -165,11 +181,21 @@ export class MiniZeldaGameComponent implements OnInit {
   }
 
   public getHero(idHero: string): void {
-    this.heroService.getHero(idHero).subscribe(hero => this.hero = hero);
+  // this.heroService.getHero(idHero).pipe(finalize(() => this.getWeapon())).subscribe(hero => this.hero = hero);
+     this.heroService.getHero(idHero).subscribe(hero => {this.hero = hero; this.getWeapon(); } );
+    // this.heroService.getHero(idHero).subscribe(
+    //   hero => this.hero = hero,
+    //   error => console.log(error),
+    //   () => {console.log(this.hero?.id_weapon), this.getWeapon(); }
+    //   );
   }
 
   public getBosses(): void {
     this.bossService.getBosses().pipe(first()).subscribe(bosses => this.bosses = bosses);
+  }
+
+  public getWeapon(): void {
+    this.weaponService.getWeapon(this.hero?.id_weapon).subscribe(weapon => this.weapon = weapon);
   }
 
   // tslint:disable-next-line:typedef use-lifecycle-interface

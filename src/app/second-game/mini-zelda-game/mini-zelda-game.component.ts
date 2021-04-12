@@ -174,46 +174,47 @@ export class MiniZeldaGameComponent implements OnInit {
         case 'KeyD':
         case 'ArrowRight':
           this.player?.moveRight();
-          if (this.boss){
-            this.player?.wichMoveX(this.boss);
-            this.player?.wichMoveY(this.boss);
-            this.player?.colision(this.boss);
-          }
-         // this.boss?.randomMove();
+          this.bossMovement();
+          this.bossRespwan();
           break;
         case 'KeyA':
         case 'ArrowLeft':
           this.player?.moveLeft();
-          if (this.boss){
-            this.player?.wichMoveX(this.boss);
-            this.player?.wichMoveY(this.boss);
-            this.player?.colision(this.boss);
-          }
-          // this.boss?.randomMove();
+          this.bossMovement();
+          this.bossRespwan();
           break;
         case 'KeyW':
         case 'ArrowUp':
           this.player?.moveUp();
-          if (this.boss){
-            this.player?.wichMoveY(this.boss);
-            this.player?.wichMoveX(this.boss);
-            this.player?.colision(this.boss);
-          }
-          // this.boss?.randomMove();
+          this.bossMovement();
+          this.bossRespwan();
           break;
         case 'KeyS':
         case 'ArrowDown':
           this.player?.moveDown();
-          if (this.boss) {
-            this.player?.wichMoveX(this.boss);
-            this.player?.wichMoveY(this.boss);
-            this.player?.colision(this.boss);
-          }
-         // this.boss?.randomMove();
+          this.bossMovement();
+          this.bossRespwan();
           break;
         case 'Space':
           break;
       }
+  }
+  public bossMovement(): void {
+    if (this.boss){
+      this.player?.wichMoveX(this.boss);
+      this.player?.wichMoveY(this.boss);
+    }
+  }
+  public bossRespwan(): void {
+    if (this.boss) {
+      if (this.player?.colision(this.boss)){
+        // @ts-ignore
+        this.bosses[0].pv -= 100;
+        // @ts-ignore
+        this.boss.setX(Math.random() * this.ctx?.canvas.width / 30);
+        // @ts-ignore
+        this.boss.setY(Math.random() * this.ctx?.canvas.height / 30);            }
+    }
   }
 
   public getHero(idHero: string): void {
@@ -223,11 +224,6 @@ export class MiniZeldaGameComponent implements OnInit {
          this.hero = hero;
          this.getWeapon();
      });
-    // this.heroService.getHero(idHero).subscribe(
-    //   hero => this.hero = hero,
-    //   error => console.log(error),
-    //   () => {console.log(this.hero?.id_weapon), this.getWeapon(); }
-    //   );
   }
 
   public getBosses(): void {

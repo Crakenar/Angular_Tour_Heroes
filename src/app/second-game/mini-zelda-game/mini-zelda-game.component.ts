@@ -76,7 +76,7 @@ export class MiniZeldaGameComponent implements OnInit {
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement> | undefined;
 
   // Variable html
-  hero?: Hero;
+  hero: Hero = {} as Hero;
   bosses: Boss[] = [];
   data: any;
   heroId?: string | null;
@@ -123,9 +123,9 @@ export class MiniZeldaGameComponent implements OnInit {
   Play(): void {
     // console.log('play' + this.ctx);
     if (this.ctx){
-      const player = new Player(this.ctx, 'green');
+      const player = new Player(this.ctx, 'green', 0, 0);
       this.player = player;
-      const boss = new Player(this.ctx, 'red');
+      const boss = new Player(this.ctx, 'red', this.ctx.canvas.width / 30 - 1, 0);
       this.boss = boss;
      // this.players = this.players.concat(player);
     }
@@ -174,22 +174,42 @@ export class MiniZeldaGameComponent implements OnInit {
         case 'KeyD':
         case 'ArrowRight':
           this.player?.moveRight();
-          this.boss?.randomMove();
+          if (this.boss){
+            this.player?.wichMoveX(this.boss);
+            this.player?.wichMoveY(this.boss);
+            this.player?.colision(this.boss);
+          }
+         // this.boss?.randomMove();
           break;
         case 'KeyA':
         case 'ArrowLeft':
           this.player?.moveLeft();
-          this.boss?.randomMove();
+          if (this.boss){
+            this.player?.wichMoveX(this.boss);
+            this.player?.wichMoveY(this.boss);
+            this.player?.colision(this.boss);
+          }
+          // this.boss?.randomMove();
           break;
         case 'KeyW':
         case 'ArrowUp':
           this.player?.moveUp();
-          this.boss?.randomMove();
+          if (this.boss){
+            this.player?.wichMoveY(this.boss);
+            this.player?.wichMoveX(this.boss);
+            this.player?.colision(this.boss);
+          }
+          // this.boss?.randomMove();
           break;
         case 'KeyS':
         case 'ArrowDown':
           this.player?.moveDown();
-          this.boss?.randomMove();
+          if (this.boss) {
+            this.player?.wichMoveX(this.boss);
+            this.player?.wichMoveY(this.boss);
+            this.player?.colision(this.boss);
+          }
+         // this.boss?.randomMove();
           break;
         case 'Space':
           break;
@@ -198,9 +218,10 @@ export class MiniZeldaGameComponent implements OnInit {
 
   public getHero(idHero: string): void {
   // this.heroService.getHero(idHero).pipe(finalize(() => this.getWeapon())).subscribe(hero => this.hero = hero);
-     this.heroService.getHero(idHero).subscribe(hero => {
-       this.hero = hero;
-       this.getWeapon();
+     this.heroService.getHero(idHero)
+       .subscribe(hero => {
+         this.hero = hero;
+         this.getWeapon();
      });
     // this.heroService.getHero(idHero).subscribe(
     //   hero => this.hero = hero,
@@ -214,7 +235,7 @@ export class MiniZeldaGameComponent implements OnInit {
   }
 
   public getWeapon(): void {
-    this.weaponService.getWeapon(this.hero?.id_weapon).subscribe(weapon => this.weapon = weapon);
+    this.weaponService.getWeapon(this.hero.id_weapon).subscribe(weapon => this.weapon = weapon);
   }
 
   // tslint:disable-next-line:typedef use-lifecycle-interface

@@ -76,6 +76,7 @@ export class BattleComponent implements OnInit {
     return this.heroIsNext ? 'X' : 'O';
   }
   // besoin de cliquer pour enclencher le move de l'ordi
+  // algo du cul
   makeMove(idx: number): void {
     if (this.squares){
       if (!this.squares[idx]) {

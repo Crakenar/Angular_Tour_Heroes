@@ -2,10 +2,12 @@ export class Player {
   private color;
   private x = 0;
   private y = 0;
-  private z = 30; // pour le css z-index
+  private z = 30;
 
-  constructor(private ctx: CanvasRenderingContext2D, private colorC: string) {
+  constructor(private ctx: CanvasRenderingContext2D, private colorC: string, private xC: number, private yC: number) {
     this.color = colorC;
+    this.x = xC;
+    this.y = yC;
   }
 
   getX(): number {
@@ -68,6 +70,44 @@ export class Player {
         this.moveUp();
         break;
     }
+  }
+
+  colision(boss: Player): boolean {
+    if (boss.getX() + 1 > this.getX() &&
+      boss.getX() - 1 < this.getX() &&
+      boss.getY() + 1 > this.getY() &&
+      boss.getY() - 1 < this.getY()){
+      return true;
+    }
+    return false;
+  }
+
+  // boss == boss
+  // this. == user
+  wichMoveX(boss: Player): void {
+    const xB = boss.getX();
+    if (xB > this.getX()){
+      boss.moveLeft();
+    }else if (xB < this.getX()) {
+      boss.moveRight();
+    }
+  }
+
+  wichMoveY(boss: Player): void {
+    const yB = boss.getY();
+    if (yB > this.getY()){
+      boss.moveUp();
+    }else if (yB < this.getY()) {
+      boss.moveDown();
+    }
+  }
+
+  getDistance(player: Player): number {
+    const xBoss = player.getX();
+    const yBoss = player.getY();
+    const xP = this.getX();
+    const yP = this.getY();
+    return Math.sqrt(Math.pow(xBoss - xP, 2) + Math.pow(yBoss - yP, 2));
   }
 
   draw(): void {

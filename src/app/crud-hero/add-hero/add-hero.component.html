@@ -47,6 +47,15 @@
       </option>
     </select>
     <br>
+    <label >imageURL: </label>
+<!--    <img *ngFor="let url of urls" [src]="url" alt="">-->
+    <img [src]="urlImageHtml" width="200" height="200" alt="">
+    <input type="file" formControlName="imageURL"(change)="onselectImage($event)"  multiple placeholder="imageURL du hero">
+    <button *ngIf="urlImageHtml != 'assets/unknownImage.png'" (click)="deleteImage()">Delete Image</button>
+    <br>
+<!--    <div *ngIf="getControl.imageURL.touched && getControl.imageURL.invalid" class="text-danger">-->
+<!--      <div *ngIf="getControl.imageURL.errors?.required">Une image est requis.</div>-->
+<!--    </div>-->
     <!--<label >Armes: </label>
     <input type="text" [(ngModel)]="arme" name="arme" placeholder="arme du hero">
     <br>-->

@@ -12,4 +12,5 @@ export class  Hero extends Serializable
   points = 40;
   id_weapon?: string;
   usage = 0;
+  imageURL?: string;
 }

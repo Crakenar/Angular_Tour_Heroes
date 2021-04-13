@@ -1,9 +1,13 @@
-import {Component, OnInit, Input, SimpleChange, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HeroService } from '../../Services/hero.service';
-import { Hero } from '../../data/hero';
 import {WeaponsService} from '../../Services/weapons.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Weapon} from '../../data/weapon';
+import {HttpClient} from '@angular/common/http';
+import {AngularFireStorage} from '@angular/fire/storage';
+import {finalize} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {FirestoreImageService} from '../../Services/firestore-image.service';
 
 @Component({
   selector: 'app-add-hero',
@@ -16,8 +20,18 @@ export class AddHeroComponent implements OnInit {
   heroForm: FormGroup;
   nbrPointRestant: number;
   weapons: Weapon[] = [];
+  selectedFile = null;
+  urlImageHtml = 'assets/unknownImage.png';
+  event: any;
 
-  constructor(private heroService: HeroService, public formBuilder: FormBuilder, private weaponService: WeaponsService) {
+
+  constructor(
+    private heroService: HeroService,
+    public formBuilder: FormBuilder,
+    private weaponService: WeaponsService,
+    private imageService: FirestoreImageService,
+    )
+  {
     this.nbrPointRestant = AddHeroComponent.INITIAL_POINTS;
     this.heroForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(4)]],
@@ -25,6 +39,7 @@ export class AddHeroComponent implements OnInit {
       attaque: ['', [Validators.required, Validators.min(1), Validators.max(37)]],
       degats: ['', [Validators.required, Validators.min(1), Validators.max(37)]],
       esquive: ['', [Validators.required, Validators.min(1), Validators.max(37)]],
+      imageURL: ['', [Validators.required]],
       id_weapon: [''],
     });
   }
@@ -40,10 +55,27 @@ export class AddHeroComponent implements OnInit {
     return this.heroForm.controls;
   }
 
+  onselectImage(event: any): void{
+    if (event.target.files){
+      this.selectedFile = event.target.files[0];
+      this.event = event;
+
+      // Preview
+      if (this.selectedFile){
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = (events: any) => {
+          this.urlImageHtml = events.target.result;
+        };
+      }
+    }
+  }
+
+  deleteImage(): void {
+  }
+
   onChangesForm(): void {
     this.heroForm.valueChanges.subscribe(value => {
-      // // console.log(value);
-      // console.log(this.heroForm.controls);
       this.nbrPointRestant = AddHeroComponent.INITIAL_POINTS;
       this.nbrPointRestant = this.nbrPointRestant - value.pv - value.attaque - value.esquive - value.degats;
     });
@@ -55,6 +87,8 @@ export class AddHeroComponent implements OnInit {
 
   onSubmit(): void {
     const hero = this.heroForm.value;
+    hero.imageURL = this.imageService.uploadImage(this.event);
+    if (!hero.imageURL){ hero.imageURL = 'assets/unknownImage.png'; }
     this.heroService.addHero(hero);
   }
 

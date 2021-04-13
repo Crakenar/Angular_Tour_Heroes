@@ -1,11 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Hero} from '../data/hero';
 import {HeroService} from '../Services/hero.service';
-import {MessageService} from '../Services/messages.service';
-import {AngularFirestore} from '@angular/fire/firestore';
 import {Observable} from 'rxjs';
-import {filter, max} from 'rxjs/operators';
-import {InternalServerComponent} from '../error-pages/internal-server/internal-server.component';
 import {ErrorHandlerService} from '../Services/error-handler.service';
 import {Router} from '@angular/router';
 import {SendDataThroughComponentsService} from '../Services/send-data-through-components.service';
@@ -46,7 +42,6 @@ export class DashboardComponent implements OnInit {
     }
       );
     this.heroService.getHeroes().subscribe(heroes => {
-      // tslint:disable-next-line:no-shadowed-variable
       this.heroMostUsed = heroes.sort((a: Hero, b: Hero) => b.usage - a.usage).splice(0, 1);
       },
       (error) => {
@@ -58,8 +53,7 @@ export class DashboardComponent implements OnInit {
 
   getHeroMaxUse(): void {
     if (this.heroes) {
-      // tslint:disable-next-line:no-shadowed-variable
-      const maxUsage = this.heroes.reduce((max: number, hero: Hero) => (hero.usage > max ? hero.usage : max), 1);
+      const maxUsage = this.heroes.reduce((f: number, hero: Hero) => (hero.usage > f ? hero.usage : f), 1);
       this.heroMostUsed = this.heroes.find(o => {
         return o.usage === maxUsage;
       });

@@ -175,25 +175,25 @@ export class MiniZeldaGameComponent implements OnInit {
         case 'ArrowRight':
           this.player?.moveRight();
           this.bossMovement();
-          this.bossRespwan();
+          this.bossRespwanGraphic();
           break;
         case 'KeyA':
         case 'ArrowLeft':
           this.player?.moveLeft();
           this.bossMovement();
-          this.bossRespwan();
+          this.bossRespwanGraphic();
           break;
         case 'KeyW':
         case 'ArrowUp':
           this.player?.moveUp();
           this.bossMovement();
-          this.bossRespwan();
+          this.bossRespwanGraphic();
           break;
         case 'KeyS':
         case 'ArrowDown':
           this.player?.moveDown();
           this.bossMovement();
-          this.bossRespwan();
+          this.bossRespwanGraphic();
           break;
         case 'Space':
           break;
@@ -205,20 +205,17 @@ export class MiniZeldaGameComponent implements OnInit {
       this.player?.wichMoveY(this.boss);
     }
   }
-  public bossRespwan(): void {
+  public bossRespwanGraphic(): void {
     if (this.boss) {
-      if (this.player?.colision(this.boss)){
-        // @ts-ignore
+      if (this.player?.colision(this.boss) && this.bosses[0].pv && this.ctx){
         this.bosses[0].pv -= 100;
-        // @ts-ignore
         this.boss.setX(Math.random() * this.ctx?.canvas.width / 30);
-        // @ts-ignore
-        this.boss.setY(Math.random() * this.ctx?.canvas.height / 30);            }
+        this.boss.setY(Math.random() * this.ctx?.canvas.height / 30);
+      }
     }
   }
 
   public getHero(idHero: string): void {
-  // this.heroService.getHero(idHero).pipe(finalize(() => this.getWeapon())).subscribe(hero => this.hero = hero);
      this.heroService.getHero(idHero)
        .subscribe(hero => {
          this.hero = hero;

@@ -19,6 +19,10 @@ Hero Detail Component
       <label>Degats : </label>
       <span>{{hero.degats}}</span>
       <br>
+      <label>Image : </label>
+      <img  src="{{urlImageHtml}}" width="200" height="200" alt="">
+      <br>
+
       <div *ngIf="weapon">
         <h3>Arme : {{weapon.name}}</h3>
         <label>Attaque : </label>
@@ -56,6 +60,11 @@ Hero Detail Component
         <br>
         <label for="hero-degats-update">Degats: </label>
         <input type="text" id="hero-degats-update" [(ngModel)]="hero.degats" name="degats" placeholder="degats du hero">
+        <br>
+        <label>Image : </label>
+        <img  src="{{urlImageHtml}}" width="200" height="200" alt="">
+        <input type="file" (change)="onselectImage($event)">
+        <button *ngIf="urlImageHtml != 'assets/unknownImage.png'" (click)="deleteImage()">Delete Image</button>
         <br>
         <label for="weapon">Choisir une arme:</label>
         <select name="id_weapon" id="weapon" [(ngModel)]="hero.id_weapon">

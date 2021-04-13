@@ -6,6 +6,7 @@ import {HeroService} from '../../Services/hero.service';
 import {WeaponsService} from '../../Services/weapons.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {Weapon} from '../../data/weapon';
+import {FirestoreImageService} from '../../Services/firestore-image.service';
 
 @Component({
   selector: 'app-hero-detail',
@@ -18,6 +19,10 @@ export class HeroDetailComponent implements OnInit {
 
   // choix weapon pour la mise a jour d'un hero
   weapons: Weapon[] = [];
+  pathImageFirestore?: string | undefined | null;
+  selectedFile = null;
+  urlImageHtml?: string;
+  event: any;
 
 
   public update?: string;
@@ -26,6 +31,7 @@ export class HeroDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private heroService: HeroService,
     private weaponService: WeaponsService,
+    private imageService: FirestoreImageService,
     private location: Location) { }
 
   ngOnInit(): void {
@@ -43,10 +49,35 @@ export class HeroDetailComponent implements OnInit {
           this.hero = hero;
           this.weaponService.getWeapon(hero.id_weapon)
             .subscribe(weapon => this.weapon = weapon);
+          if (hero.imageURL){
+            this.imageService.getImage(hero.imageURL)
+              .subscribe(u => this.urlImageHtml = u);
+          }
+          if (this.urlImageHtml === '' || this.urlImageHtml == null){
+            this.urlImageHtml = 'assets/unknownImage.png';
+          }
         });
     }
-    }
+  }
 
+  onselectImage(event: any): void{
+    if (event.target.files){
+      this.selectedFile = event.target.files[0];
+      this.event = event;
+      // Preview
+      if (this.selectedFile){
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = (events: any) => {
+          this.urlImageHtml = events.target.result;
+        };
+      }
+    }
+  }
+
+  deleteImage(): void {
+    this.imageService.deleteImage(this.hero?.imageURL);
+  }
 
     getIfUpdate(): void {
       const path = this.route.snapshot.url;
@@ -58,7 +89,12 @@ export class HeroDetailComponent implements OnInit {
     }
 
   onSubmit(): void {
-    this.heroService.updateHero(this.hero);
+    if (this.hero){
+      this.hero.imageURL = this.imageService.uploadImage(this.event);
+      console.log(this.hero.imageURL);
+      if (!this.hero.imageURL){ this.hero.imageURL = 'assets/unknownImage.png'; }
+      this.heroService.updateHero(this.hero);
+    }
     this.goBack();
   }
 

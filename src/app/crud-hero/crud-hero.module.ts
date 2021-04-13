@@ -7,6 +7,7 @@ import {HeroesComponent} from './heroes/heroes.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import {HeroRoutingModule} from './hero-routing.module';
+import {HttpClient} from '@angular/common/http';
 
 
 
@@ -14,12 +15,12 @@ import {HeroRoutingModule} from './hero-routing.module';
   declarations: [
     AddHeroComponent,
     HeroDetailComponent,
-    HeroesComponent
+    HeroesComponent,
   ],
   exports: [
     AddHeroComponent,
     HeroDetailComponent,
-    HeroesComponent
+    HeroesComponent,
   ],
   imports: [
     CommonModule,

@@ -9,6 +9,7 @@ import {error} from '@angular/compiler/src/util';
 import {first} from 'rxjs/operators';
 import {Weapon} from '../../data/weapon';
 import {WeaponsService} from '../../Services/weapons.service';
+import {FirestoreImageService} from '../../Services/firestore-image.service';
 
 @Component({
   selector: 'app-battle',
@@ -19,6 +20,7 @@ export class BattleComponent implements OnInit {
   private static PV = 1;
 
   hero: Hero = {} as Hero;
+  heroImage?: string;
   bosses: Boss[] = [];
   boss?: Boss;
   weapon?: Weapon;
@@ -32,7 +34,8 @@ export class BattleComponent implements OnInit {
               private heroService: HeroService,
               private bossService: BossService,
               private weaponService: WeaponsService,
-              private transfertService: SendDataThroughComponentsService
+              private transfertService: SendDataThroughComponentsService,
+              private imageService: FirestoreImageService,
               ) {
   }
 
@@ -195,6 +198,11 @@ export class BattleComponent implements OnInit {
         .subscribe(hero => {
           this.hero = hero;
           this.getWeapon();
+          console.log(hero);
+          if (hero.imageURL){
+            this.imageService.getImage(hero.imageURL)
+              .subscribe(i => this.heroImage = i);
+          }
         });
     }
   }

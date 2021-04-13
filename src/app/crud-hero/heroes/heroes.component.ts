@@ -5,6 +5,7 @@ import {MessageService} from '../../Services/messages.service';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {SendDataThroughComponentsService} from '../../Services/send-data-through-components.service';
+import {FirestoreImageService} from '../../Services/firestore-image.service';
 
 @Component({
   selector: 'app-heroes',
@@ -21,6 +22,7 @@ export class HeroesComponent implements OnInit {
     private messageService: MessageService,
     private heroService: HeroService,
     private transfertService: SendDataThroughComponentsService,
+    private imageService: FirestoreImageService,
     private router: Router) { }
   ngOnInit(): void {
     this.getHeroes();
@@ -92,8 +94,9 @@ export class HeroesComponent implements OnInit {
      this.heroService.getHeroes().subscribe(heroes => this.heroes = heroes);
   }
 
-  delete(id?: string): void {
-    this.heroService.deleteHero(id);
+  delete(hero?: Hero): void {
+    this.heroService.deleteHero(hero?.id);
+    this.imageService.deleteImage(hero?.imageURL);
   }
 
 

@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BattleComponent } from './battle.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../../../environments/environment';
 
 describe('BattleComponent', () => {
   let component: BattleComponent;
@@ -8,6 +11,11 @@ describe('BattleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        AngularFireModule,
+        AngularFireModule.initializeApp(environment.firebase)
+      ],
       declarations: [ BattleComponent ]
     })
     .compileComponents();

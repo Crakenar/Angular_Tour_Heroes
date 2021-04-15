@@ -1,12 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
 import { SendDataThroughComponentsService } from './send-data-through-components.service';
+import {ActivatedRoute} from '@angular/router';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('SendDataThroughComponentsService', () => {
   let service: SendDataThroughComponentsService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+    });
     service = TestBed.inject(SendDataThroughComponentsService);
   });
 

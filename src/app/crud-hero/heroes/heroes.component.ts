@@ -82,7 +82,7 @@ export class HeroesComponent implements OnInit {
    });
    // this.router.navigate(['/battle/' + id]);
     // teo
-   this.router.navigate(['game-select']);
+   this.router.navigate(['game-select/' + id]);
    this.transfertService.setData({
      idHero : id
    });

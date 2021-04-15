@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { VictoryDefeatScreenComponent } from './victory-defeat-screen.component';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../../../environments/environment';
 
 describe('VictoryDefeatScreenComponent', () => {
   let component: VictoryDefeatScreenComponent;
@@ -8,6 +11,11 @@ describe('VictoryDefeatScreenComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule,
+        AngularFireModule,
+        AngularFireModule.initializeApp(environment.firebase)
+      ],
       declarations: [ VictoryDefeatScreenComponent ]
     })
     .compileComponents();

@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeroDetailComponent } from './hero-detail.component';
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../../../environments/environment';
+import {AppRoutingModule} from '../../app-routing.module';
 
 describe('HeroDetailComponent', () => {
   let component: HeroDetailComponent;
@@ -8,7 +11,14 @@ describe('HeroDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeroDetailComponent ]
+      imports: [
+        AppRoutingModule,
+        AngularFireModule,
+        AngularFireModule.initializeApp(environment.firebase),
+      ],
+      declarations: [
+        HeroDetailComponent,
+      ]
     })
     .compileComponents();
   });

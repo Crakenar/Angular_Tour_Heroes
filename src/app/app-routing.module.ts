@@ -30,7 +30,7 @@ const routes: Routes = [
       .then(m => m.ErrorPagesModule)},
 
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'game-select', component: GamesSelectComponent },
+  { path: 'game-select/:id', component: GamesSelectComponent },
   { path: '404', component: NotFound404Component },
   { path: '**', redirectTo: '404', pathMatch: 'full' }
 ];

@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "test-singlerun": "ng test --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
@@ -32,7 +33,7 @@
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
-    "@angular-builders/custom-webpack": "11.1.0",
+    "@angular-builders/custom-webpack": "^11.1.0",
     "@angular-devkit/architect": "^0.1102.3",
     "@angular-devkit/build-angular": "^0.1102.3",
     "@angular/cli": "^11.2.3",

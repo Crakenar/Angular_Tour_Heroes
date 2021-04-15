@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
           this.heroService.updateHero(value);
         }
       });
-      this.router.navigate(['game-select']);
+      this.router.navigate(['game-select/' + id]);
       this.transfertService.setData({
         idHero : id
       });

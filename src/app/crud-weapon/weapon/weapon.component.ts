@@ -5,6 +5,7 @@ import {HeroService} from '../../Services/hero.service';
 import {MessageService} from '../../Services/messages.service';
 import {Observable} from 'rxjs';
 
+
 @Component({
   selector: 'app-weapon',
   templateUrl: './weapon.component.html',

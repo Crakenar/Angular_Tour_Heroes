@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GamesSelectComponent } from './games-select.component';
+import { BattleComponent } from './battle.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AngularFireModule} from '@angular/fire';
-import {environment} from '../../environments/environment';
+import {environment} from '../../../../environments/environment';
 
-describe('GamesSelectComponent', () => {
-  let component: GamesSelectComponent;
-  let fixture: ComponentFixture<GamesSelectComponent>;
+describe('BattleComponent', () => {
+  let component: BattleComponent;
+  let fixture: ComponentFixture<BattleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -16,15 +16,14 @@ describe('GamesSelectComponent', () => {
         AngularFireModule,
         AngularFireModule.initializeApp(environment.firebase)
       ],
-      declarations: [ GamesSelectComponent ]
+      declarations: [ BattleComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GamesSelectComponent);
+    fixture = TestBed.createComponent(BattleComponent);
     component = fixture.componentInstance;
-    component.heroId = '2Nddd23f22';
     fixture.detectChanges();
   });
 

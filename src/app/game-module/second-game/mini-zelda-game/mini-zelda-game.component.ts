@@ -1,14 +1,14 @@
 import {Component, ElementRef, HostListener, NgZone, OnInit, ViewChild} from '@angular/core';
 import {Player} from '../Player';
-import {HeroService} from '../../Services/hero.service';
-import {Hero} from '../../data/hero';
-import {Boss} from '../../data/Boss';
-import {BossService} from '../../Services/boss.service';
+import {HeroService} from '../../../Services/hero.service';
+import {Hero} from '../../../data/hero';
+import {Boss} from '../../../data/Boss';
+import {BossService} from '../../../Services/boss.service';
 import {finalize, first} from 'rxjs/operators';
-import {SendDataThroughComponentsService} from '../../Services/send-data-through-components.service';
+import {SendDataThroughComponentsService} from '../../../Services/send-data-through-components.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {WeaponsService} from '../../Services/weapons.service';
-import {Weapon} from '../../data/weapon';
+import {WeaponsService} from '../../../Services/weapons.service';
+import {Weapon} from '../../../data/weapon';
 
 @Component({
   selector: 'app-mini-zelda-game',

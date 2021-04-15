@@ -6,11 +6,11 @@ import { HeroDetailComponent } from './crud-hero/hero-detail/hero-detail.compone
 import { WeaponComponent} from './crud-weapon/weapon/weapon.component';
 import {DetailWeaponComponent} from './crud-weapon/detail-weapon/detail-weapon.component';
 import {AddHeroComponent} from './crud-hero/add-hero/add-hero.component';
-import {BattleComponent} from './first-game/battle/battle.component';
+import {BattleComponent} from './game-module/first-game/battle/battle.component';
 import {AddWeaponComponent} from './crud-weapon/add-weapon/add-weapon.component';
-import {VictoryDefeatScreenComponent} from './first-game/victory-defeat-screen/victory-defeat-screen.component';
-import {GamesSelectComponent} from './games-select/games-select.component';
-import {MiniZeldaGameComponent} from './second-game/mini-zelda-game/mini-zelda-game.component';
+import {VictoryDefeatScreenComponent} from './game-module/first-game/victory-defeat-screen/victory-defeat-screen.component';
+import {GamesSelectComponent} from './game-module/games-select/games-select.component';
+import {MiniZeldaGameComponent} from './game-module/second-game/mini-zelda-game/mini-zelda-game.component';
 import {InternalServerComponent} from './error-pages/internal-server/internal-server.component';
 import {NotFound404Component} from './error-pages/not-found404/not-found404.component';
 
@@ -22,15 +22,16 @@ const routes: Routes = [
       .then(m => m.CrudHeroModule) },
   { path: 'weapons', loadChildren: () => import('./crud-weapon/crud-weapon.module')
       .then(m => m.CrudWeaponModule) },
-  { path: 'battle/:id', loadChildren: () => import('./first-game/first-game.module')
-      .then(m => m.FirstGameModule)},
-  { path: 'zelda-game', loadChildren: () => import('./second-game/second-game.module')
-      .then(m => m.SecondGameModule)},
+  // { path: 'battle/:id', loadChildren: () => import('./game-module/first-game/first-game.module')
+  //     .then(m => m.FirstGameModule) },
+  // { path: 'zelda-game', loadChildren: () => import('./second-game/second-game.module')
+  //     .then(m => m.SecondGameModule) },
   { path: 'error-pages', loadChildren: () => import ('./error-pages/error-pages.module')
-      .then(m => m.ErrorPagesModule)},
+      .then(m => m.ErrorPagesModule) },
+  { path: 'game-select/:id', loadChildren: () => import('./game-module/game-module.module')
+      .then(m => m.GameModuleModule) },
 
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'game-select/:id', component: GamesSelectComponent },
   { path: '404', component: NotFound404Component },
   { path: '**', redirectTo: '404', pathMatch: 'full' }
 ];

@@ -1,13 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BattleComponent } from './battle.component';
+import { VictoryDefeatScreenComponent } from './victory-defeat-screen.component';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AngularFireModule} from '@angular/fire';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 
-describe('BattleComponent', () => {
-  let component: BattleComponent;
-  let fixture: ComponentFixture<BattleComponent>;
+describe('VictoryDefeatScreenComponent', () => {
+  let component: VictoryDefeatScreenComponent;
+  let fixture: ComponentFixture<VictoryDefeatScreenComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -16,13 +16,13 @@ describe('BattleComponent', () => {
         AngularFireModule,
         AngularFireModule.initializeApp(environment.firebase)
       ],
-      declarations: [ BattleComponent ]
+      declarations: [ VictoryDefeatScreenComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BattleComponent);
+    fixture = TestBed.createComponent(VictoryDefeatScreenComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

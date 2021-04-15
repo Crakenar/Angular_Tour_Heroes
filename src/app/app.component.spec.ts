@@ -8,7 +8,7 @@ import {environment} from '../environments/environment';
 import {HttpClientModule} from '@angular/common/http';
 import {MessagesComponent} from './messages/messages.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {GamesSelectComponent} from './games-select/games-select.component';
+import {GamesSelectComponent} from './game-module/games-select/games-select.component';
 import {FilterPipePipe} from './filter-pipe.pipe';
 
 describe('AppComponent', () => {

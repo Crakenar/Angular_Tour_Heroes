@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HeroService} from '../../Services/hero.service';
-import {Boss} from '../../data/Boss';
-import {Hero} from '../../data/hero';
-import {BossService} from '../../Services/boss.service';
-import { SendDataThroughComponentsService } from '../../Services/send-data-through-components.service';
+import {HeroService} from '../../../Services/hero.service';
+import {Boss} from '../../../data/Boss';
+import {Hero} from '../../../data/hero';
+import {BossService} from '../../../Services/boss.service';
+import { SendDataThroughComponentsService } from '../../../Services/send-data-through-components.service';
 import {error} from '@angular/compiler/src/util';
 import {first} from 'rxjs/operators';
-import {Weapon} from '../../data/weapon';
-import {WeaponsService} from '../../Services/weapons.service';
-import {FirestoreImageService} from '../../Services/firestore-image.service';
+import {Weapon} from '../../../data/weapon';
+import {WeaponsService} from '../../../Services/weapons.service';
+import {FirestoreImageService} from '../../../Services/firestore-image.service';
 
 @Component({
   selector: 'app-battle',
@@ -187,7 +187,7 @@ export class BattleComponent implements OnInit {
       typeInfo,
       idHero
     });
-    this.router.navigate(['battle/' + idHero + '/victory-defeat-screen']);
+    this.router.navigate(['game-select/' + idHero + '/battle/victory-defeat-screen']);
   }
 
   getHero(): void {

@@ -5,7 +5,7 @@ import { environment } from '../environments/environment';
 import { FilterPipePipe } from './filter-pipe.pipe';
 
 // Components
-import { GamesSelectComponent } from './games-select/games-select.component';
+import { GamesSelectComponent } from './game-module/games-select/games-select.component';
 import { AppComponent } from './app.component';
 import { MessagesComponent } from './messages/messages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -21,8 +21,6 @@ import {HttpClientModule} from '@angular/common/http';
     AppComponent,
     MessagesComponent,
     DashboardComponent,
-    GamesSelectComponent,
-
     FilterPipePipe,
   ],
   imports: [

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SendDataThroughComponentsService} from '../../Services/send-data-through-components.service';
+import {SendDataThroughComponentsService} from '../../../Services/send-data-through-components.service';
 
 @Component({
   selector: 'app-victory-defeat-screen',

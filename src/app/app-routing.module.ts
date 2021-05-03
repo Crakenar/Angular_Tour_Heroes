@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HeroesComponent } from './crud-hero/heroes/heroes.component';
+import { HeroesComponent } from './editor-module/crud-hero/heroes/heroes.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import { HeroDetailComponent } from './crud-hero/hero-detail/hero-detail.component';
-import { WeaponComponent} from './crud-weapon/weapon/weapon.component';
-import {DetailWeaponComponent} from './crud-weapon/detail-weapon/detail-weapon.component';
-import {AddHeroComponent} from './crud-hero/add-hero/add-hero.component';
+import { HeroDetailComponent } from './editor-module/crud-hero/hero-detail/hero-detail.component';
+import { WeaponComponent} from './editor-module/crud-weapon/weapon/weapon.component';
+import {DetailWeaponComponent} from './editor-module/crud-weapon/detail-weapon/detail-weapon.component';
+import {AddHeroComponent} from './editor-module/crud-hero/add-hero/add-hero.component';
 import {BattleComponent} from './game-module/first-game/battle/battle.component';
-import {AddWeaponComponent} from './crud-weapon/add-weapon/add-weapon.component';
+import {AddWeaponComponent} from './editor-module/crud-weapon/add-weapon/add-weapon.component';
 import {VictoryDefeatScreenComponent} from './game-module/first-game/victory-defeat-screen/victory-defeat-screen.component';
 import {GamesSelectComponent} from './game-module/games-select/games-select.component';
 import {MiniZeldaGameComponent} from './game-module/second-game/mini-zelda-game/mini-zelda-game.component';
@@ -18,14 +18,14 @@ const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
   // LAZY LOAD MODULES
-  { path: 'heroes', loadChildren: () => import('./crud-hero/crud-hero.module')
+  { path: 'heroes', loadChildren: () => import('./editor-module/crud-hero/crud-hero.module')
       .then(m => m.CrudHeroModule) },
-  { path: 'weapons', loadChildren: () => import('./crud-weapon/crud-weapon.module')
+  { path: 'weapons', loadChildren: () => import('./editor-module/crud-weapon/crud-weapon.module')
       .then(m => m.CrudWeaponModule) },
-  // { path: 'battle/:id', loadChildren: () => import('./game-module/first-game/first-game.module')
-  //     .then(m => m.FirstGameModule) },
-  // { path: 'zelda-game', loadChildren: () => import('./second-game/second-game.module')
-  //     .then(m => m.SecondGameModule) },
+
+  { path: 'edit', loadChildren: () => import('./editor-module/editor-module.module')
+      .then(m => m.EditorModuleModule) },
+
   { path: 'error-pages', loadChildren: () => import ('./error-pages/error-pages.module')
       .then(m => m.ErrorPagesModule) },
   { path: 'game-select/:id', loadChildren: () => import('./game-module/game-module.module')

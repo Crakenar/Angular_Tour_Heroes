@@ -9,6 +9,8 @@ import {SendDataThroughComponentsService} from '../../../Services/send-data-thro
 import {ActivatedRoute, Router} from '@angular/router';
 import {WeaponsService} from '../../../Services/weapons.service';
 import {Weapon} from '../../../data/weapon';
+import {FirestoreImageService} from '../../../Services/firestore-image.service';
+import {BattleComponent} from '../../first-game/battle/battle.component';
 
 @Component({
   selector: 'app-mini-zelda-game',
@@ -18,7 +20,7 @@ import {Weapon} from '../../../data/weapon';
       <div class="col-lg-2">
         <div *ngIf="hero">
           <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="https://image.freepik.com/vecteurs-libre/couple-super-heros_1284-16926.jpg" alt="Card image cap">
+            <img src="{{heroImage}}" alt="">
             <div class="card-body">
               <h5 class="card-title">{{hero.name}}</h5>
               <ul class="list-group">
@@ -73,10 +75,12 @@ import {Weapon} from '../../../data/weapon';
 export class MiniZeldaGameComponent implements OnInit {
 
   private static FPS = 60;
+  private static PV = 100;
   @ViewChild('canvas', { static: true }) canvas: ElementRef<HTMLCanvasElement> | undefined;
 
   // Variable html
   hero: Hero = {} as Hero;
+  heroImage?: string;
   bosses: Boss[] = [];
   data: any;
   heroId?: string | null;
@@ -93,10 +97,12 @@ export class MiniZeldaGameComponent implements OnInit {
   constructor(
     private ngZone: NgZone,
     private route: ActivatedRoute,
+    private router: Router,
     private heroService: HeroService,
     private bossService: BossService,
     private weaponService: WeaponsService,
     private transfertService: SendDataThroughComponentsService,
+    private imageService: FirestoreImageService,
   ) { }
 
   ngOnInit(): void {
@@ -206,20 +212,52 @@ export class MiniZeldaGameComponent implements OnInit {
     }
   }
   public bossRespwanGraphic(): void {
+    if (this.bosses[0].pv && this.bosses[0].pv <= 0 && this.hero?.id){
+      if (this.isBossDead()) {
+        if (this.bosses.length){
+          this.bosses[0].vaincu++;
+          this.bosses[0].pv = MiniZeldaGameComponent.PV;
+          this.bossService.updateBoss(this.bosses[0]).then( res =>
+            this.checkIfOpponents()
+          );
+        }
+      }else if (this.isHeroDead()){
+        if (this.bosses.length){
+          this.bosses[0].nbrVictoire++;
+          this.bosses[0].pv = MiniZeldaGameComponent.PV;
+          this.bossService.updateBoss(this.bosses[0]).then( res =>
+            this.checkIfOpponents()
+          );
+        }
+      }
+    }
     if (this.boss) {
       if (this.player?.colision(this.boss) && this.bosses[0].pv && this.ctx){
-        this.bosses[0].pv -= 100;
+          // @ts-ignore
+        this.bosses[0].pv = this.bosses[0].pv - (this.hero.degats + this.hero.attaque + this.weapon?.attaque + this.weapon?.degats);
         this.boss.setX(Math.random() * this.ctx?.canvas.width / 30);
         this.boss.setY(Math.random() * this.ctx?.canvas.height / 30);
       }
     }
   }
 
+ finishScreen(typeInfo: string, idHero?: string): void {
+  this.transfertService.setData({
+    typeInfo,
+    idHero
+  });
+  this.router.navigate(['game-select/' + idHero + '/battle/victory-defeat-screen']);
+}
+
   public getHero(idHero: string): void {
      this.heroService.getHero(idHero)
        .subscribe(hero => {
          this.hero = hero;
          this.getWeapon();
+         if (this.hero.imageURL){
+           this.imageService.getImage(this.hero.imageURL)
+             .subscribe(i => this.heroImage = i);
+         }
      });
   }
 
@@ -231,9 +269,39 @@ export class MiniZeldaGameComponent implements OnInit {
     this.weaponService.getWeapon(this.hero.id_weapon).subscribe(weapon => this.weapon = weapon);
   }
 
-  // tslint:disable-next-line:typedef use-lifecycle-interface
+
+  isBossDead(): boolean{
+    if (this.bosses[0].pv){
+      return this.bosses[0].pv <= 0;
+    }else{
+      return false;
+    }
+  }
+
+  isHeroDead(): boolean {
+    if (this.hero.pv){
+      return this.hero.pv <= 0;
+    }else{
+      return false;
+    }
+  }
+
+  checkIfOpponents(): void {
+    if (this.hero && this.hero.pv){
+      if (this.hero.pv <= 0){
+        this.finishScreen('defeat', this.hero.id);
+      }else{
+        this.bosses.splice(0, 1);
+        if (this.bosses.length === 0){
+          this.finishScreen('victory', this.hero.id);
+        }
+      }
+    }
+  }
+
+/*  // tslint:disable-next-line:typedef use-lifecycle-interface
   ngOnDestroy() {
     clearInterval(this.interval);
     cancelAnimationFrame(this.requestId);
-  }
+  }*/
 }

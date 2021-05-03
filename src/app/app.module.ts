@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { environment } from '../environments/environment';
 
 // Pipe
-import { FilterPipePipe } from './filter-pipe.pipe';
+import { FilterPipePipe } from './Pipes/filter-pipe.pipe';
 
 // Components
 import { GamesSelectComponent } from './game-module/games-select/games-select.component';

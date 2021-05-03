@@ -1,30 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeroDetailComponent } from './hero-detail.component';
+import { AddWeaponComponent } from './add-weapon.component';
 import {AngularFireModule} from '@angular/fire';
-import {environment} from '../../../environments/environment';
-import {AppRoutingModule} from '../../app-routing.module';
+import {environment} from '../../../../environments/environment';
+import {ReactiveFormsModule} from '@angular/forms';
 
-describe('HeroDetailComponent', () => {
-  let component: HeroDetailComponent;
-  let fixture: ComponentFixture<HeroDetailComponent>;
+describe('AddWeaponComponent', () => {
+  let component: AddWeaponComponent;
+  let fixture: ComponentFixture<AddWeaponComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        AppRoutingModule,
+        ReactiveFormsModule,
         AngularFireModule,
         AngularFireModule.initializeApp(environment.firebase),
       ],
-      declarations: [
-        HeroDetailComponent,
-      ]
+      declarations: [ AddWeaponComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeroDetailComponent);
+    fixture = TestBed.createComponent(AddWeaponComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

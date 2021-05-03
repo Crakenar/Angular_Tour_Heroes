@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Weapon} from '../../data/weapon';
-import {WeaponsService} from '../../Services/weapons.service';
-import {HeroService} from '../../Services/hero.service';
-import {MessageService} from '../../Services/messages.service';
+import {Weapon} from '../../../data/weapon';
+import {WeaponsService} from '../../../Services/weapons.service';
+import {HeroService} from '../../../Services/hero.service';
+import {MessageService} from '../../../Services/messages.service';
 import {Observable} from 'rxjs';
 
 

@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {HeroService } from '../../Services/hero.service';
-import {WeaponsService} from '../../Services/weapons.service';
+import {HeroService } from '../../../Services/hero.service';
+import {WeaponsService} from '../../../Services/weapons.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Weapon} from '../../data/weapon';
+import {Weapon} from '../../../data/weapon';
 import {HttpClient} from '@angular/common/http';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {FirestoreImageService} from '../../Services/firestore-image.service';
+import {FirestoreImageService} from '../../../Services/firestore-image.service';
 
 @Component({
   selector: 'app-add-hero',

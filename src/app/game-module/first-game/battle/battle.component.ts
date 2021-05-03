@@ -5,7 +5,6 @@ import {Boss} from '../../../data/Boss';
 import {Hero} from '../../../data/hero';
 import {BossService} from '../../../Services/boss.service';
 import { SendDataThroughComponentsService } from '../../../Services/send-data-through-components.service';
-import {error} from '@angular/compiler/src/util';
 import {first} from 'rxjs/operators';
 import {Weapon} from '../../../data/weapon';
 import {WeaponsService} from '../../../Services/weapons.service';
@@ -51,8 +50,8 @@ export class BattleComponent implements OnInit {
   // Winner = X => Hero attaque boss
   attack(): void {
     if (this.winner === 'X'){
-      if (this.hero && this.hero.attaque && this.hero.degats){
-        const attackDmg = (-this.hero.attaque) + (-this.hero.degats);
+      if (this.hero && this.hero.attaque && this.hero.degats && this.weapon?.degats && this.weapon?.attaque){
+        const attackDmg = (-this.hero.attaque) + (-this.hero.degats) + (-this.weapon?.degats) + (-this.weapon?.attaque);
         if (this.bosses.length && this.bosses[0].pv){
           this.bosses[0].pv = this.bosses[0].pv + attackDmg;
         }

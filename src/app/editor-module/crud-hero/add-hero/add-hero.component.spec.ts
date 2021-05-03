@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddHeroComponent } from './add-hero.component';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import {FilterPipePipe} from '../../filter-pipe.pipe';
+import {FilterPipePipe} from '../../../Pipes/filter-pipe.pipe';
 import {AngularFireModule} from '@angular/fire';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 
 describe('AddHeroComponent', () => {
   let component: AddHeroComponent;

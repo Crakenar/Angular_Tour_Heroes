@@ -1,30 +1,28 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeroesComponent } from './heroes.component';
+import { WeaponComponent } from './weapon.component';
 import {AngularFireModule} from '@angular/fire';
-import {environment} from '../../../environments/environment';
-import {AppRoutingModule} from '../../app-routing.module';
+import {environment} from '../../../../environments/environment';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
-describe('HeroesComponent', () => {
-  let component: HeroesComponent;
-  let fixture: ComponentFixture<HeroesComponent>;
+describe('WeaponComponent', () => {
+  let component: WeaponComponent;
+  let fixture: ComponentFixture<WeaponComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
         Ng2SearchPipeModule,
-        AppRoutingModule,
         AngularFireModule,
         AngularFireModule.initializeApp(environment.firebase),
       ],
-      declarations: [ HeroesComponent ]
+      declarations: [ WeaponComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HeroesComponent);
+    fixture = TestBed.createComponent(WeaponComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

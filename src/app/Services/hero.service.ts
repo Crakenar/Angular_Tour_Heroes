@@ -11,7 +11,7 @@ import {map} from 'rxjs/operators';
 export class HeroService {
   private static url = 'heroes';
 
-  constructor(private messageService: MessageService, private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore) { }
 
   /*getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES);
